@@ -104,3 +104,5 @@ async function renderTokenTable() {
 
 // Kick off table rendering on page load
 document.addEventListener("DOMContentLoaded", renderTokenTable);
+// Re-run every 60 seconds
+setInterval(renderTokenTable, 60000);
