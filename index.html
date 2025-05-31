@@ -168,12 +168,11 @@
     }
 
     .community-section {
-  padding: 1.5rem;
-  background: var(--section-gradient);
-  border-radius: 8px;
-  margin: 1rem 0; /* Adjusted vertical spacing */
+      padding: 1.5rem;
+      background: var(--section-gradient);
+      border-radius: 8px;
+      margin: 1rem 0;
     }
-
 
     .community-section h2 {
       font-size: 1.5rem;
@@ -261,35 +260,21 @@
     <details open>
       <summary class="section-title">Launched Coins</summary>
       <div class="section-content">
-        <p>Tokens Mythic Market has launched so far. Click the Explorer links to see them on Solana:</p>
+        <p>Tokens Mythic Market has launched so far:</p>
         <table class="coins-table">
           <thead>
             <tr>
-              <th>Coin</th>
-              <th>Symbol</th>
-              <th>Launch Date</th>
+              <th>Token</th>
+              <th>Market Cap</th>
+              <th>Price</th>
+              <th>Holders</th>
+              <th>Liquidity</th>
+              <th>+% Since Launch</th>
               <th>Explorer</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><img src="assets/ARES.png" alt="ARES" />ARES</td>
-              <td>ARES</td>
-              <td>Soon</td>
-              <td><a href="https://explorer.solana.com/address/ExampleMintAddress1" target="_blank">View</a></td>
-            </tr>
-            <tr>
-              <td><img src="assets/ZEUS.png" alt="ZEUS" />ZEUS</td>
-              <td>ZEUS</td>
-              <td>Soon</td>
-              <td><a href="https://explorer.solana.com/address/ExampleMintAddress2" target="_blank">View</a></td>
-            </tr>
-            <tr>
-              <td><img src="assets/THOR.png" alt="THOR" />THOR</td>
-              <td>THOR</td>
-              <td>Soon</td>
-              <td><a href="https://explorer.solana.com/address/ExampleMintAddress3" target="_blank">View</a></td>
-            </tr>
+          <tbody id="token-data">
+            <!-- Token rows will be dynamically inserted by JS below -->
           </tbody>
         </table>
       </div>
@@ -359,5 +344,6 @@
       localStorage.setItem('theme', next);
     });
   </script>
+  <script src="live-tokens.js"></script>
 </body>
 </html>
