@@ -7,218 +7,220 @@
   <link rel="icon" href="assets/favicon.ico" />
 
   <style>
-    :root {
-      --bg-gradient: linear-gradient(135deg, #00e0ff, #006eff);
-      --section-gradient: linear-gradient(135deg, #d0f4ff, #a0d9ff);
-      --header-gradient: linear-gradient(135deg, #004080, #001f3f);
-      --text-color: #000;
-      --section-bg: #f0f8ff;
-      --header-text: #fff;
-    }
+  :root {
+    --bg-gradient: linear-gradient(135deg, #00e0ff, #006eff);
+    --section-gradient: linear-gradient(135deg, #d0f4ff, #a0d9ff);
+    --header-gradient: linear-gradient(135deg, #004080, #001f3f);
+    --text-color: #000;
+    --section-bg: #f0f8ff;
+    --header-text: #fff;
+  }
 
-    [data-theme="dark"] {
-      --bg-gradient: linear-gradient(135deg, #001f3f, #004080);
-      --section-gradient: linear-gradient(135deg, #003366, #002244);
-      --header-gradient: linear-gradient(135deg, #000c1a, #001f3f);
-      --text-color: #fff;
-      --section-bg: #0c1b2a;
-      --header-text: #fff;
-    }
+  [data-theme="dark"] {
+    --bg-gradient: linear-gradient(135deg, #001f3f, #004080);
+    --section-gradient: linear-gradient(135deg, #003366, #002244);
+    --header-gradient: linear-gradient(135deg, #000c1a, #001f3f);
+    --text-color: #fff;
+    --section-bg: #0c1b2a;
+    --header-text: #fff;
+  }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-    body {
-      background: var(--bg-gradient);
-      color: var(--text-color);
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-    }
+  body {
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
 
-    a {
-      color: #00c2ff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+  a {
+    color: #00c2ff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
 
-    header {
-      position: relative;
-      background: #000;
-      color: var(--header-text);
-      text-align: center;
-      padding: 2rem 1rem;
-    }
+  header {
+    position: relative;
+    background: #000;
+    color: var(--header-text);
+    text-align: center;
+    padding: 2rem 1rem;
+  }
 
-    #theme-toggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: #333;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+  #theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #333;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-    header img {
-      max-width: 220px;
-      margin-bottom: 0.5rem;
-    }
+  header img {
+    max-width: 220px;
+    margin-bottom: 0.5rem;
+  }
 
-    header h1 {
-      color: #fff;
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
+  header h1 {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
 
-    header p {
-      opacity: 0.8;
-      font-size: 1rem;
-    }
+  header p {
+    opacity: 0.8;
+    font-size: 1rem;
+  }
 
-    #countdown {
-      font-size: 1.5rem;
-      color: #ffcc00;
-      margin-top: 1rem;
-    }
+  #countdown {
+    font-size: 1.5rem;
+    color: #ffcc00;
+    margin-top: 1rem;
+  }
 
-    main {
-      max-width: 800px;
-      margin: 1.5rem auto;
-      padding: 0 1rem;
-    }
+  main {
+    max-width: 800px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+  }
 
-    details {
-      margin-bottom: 1.5rem;
-    }
+  details {
+    margin-bottom: 1.5rem;
+  }
 
-    summary.section-title {
-      font-size: 1.5rem;
-      padding: 0.75rem 1rem;
-      background: var(--header-gradient);
-      color: var(--header-text);
-      border-radius: 8px;
-      cursor: pointer;
-    }
+  summary.section-title {
+    font-size: 1.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--header-gradient);
+    color: var(--header-text);
+    border-radius: 8px;
+    cursor: pointer;
+  }
 
-    .section-content {
-      padding: 1rem;
-      background: var(--section-gradient);
-      border-radius: 8px;
-      margin-top: 0.5rem;
-    }
+  .section-content {
+    padding: 1rem;
+    background: var(--section-gradient);
+    border-radius: 8px;
+    margin-top: 0.5rem;
+  }
 
-    /* Hide default markers in all major browsers */
-    details summary::marker {
-      display: none;
-    }
-    details summary::-webkit-details-marker {
-      display: none;
-    }
-    details summary::-moz-list-marker {
-      display: none;
-    }
+  /* 🔥 Final cross-browser fix: hide native disclosure markers */
+  summary {
+    list-style: none;
+  }
 
-    details summary::before {
-      content: "▶";
-      display: inline-block;
-      margin-right: 0.5em;
-      transform: rotate(0deg);
-      transition: transform 0.2s ease-in-out;
-    }
+  summary::marker,
+  summary::-webkit-details-marker {
+    display: none;
+    font-size: 0;
+    color: transparent;
+  }
 
-    details[open] summary::before {
-      transform: rotate(90deg);
-    }
+  /* Custom arrow */
+  summary::before {
+    content: "▶";
+    display: inline-block;
+    margin-right: 0.5em;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-in-out;
+  }
 
-    ul {
-      padding-left: 1.2rem;
-    }
+  details[open] summary::before {
+    transform: rotate(90deg);
+  }
 
-    .coins-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
+  ul {
+    padding-left: 1.2rem;
+  }
 
-    .coins-table th, .coins-table td {
-      padding: 0.75rem;
-      border-bottom: 1px solid #ccc;
-    }
+  .coins-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
 
-    .coins-table th {
-      background: #005fa3;
-      color: white;
-    }
+  .coins-table th, .coins-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ccc;
+  }
 
-    .coins-table img {
-      width: 24px;
-      height: 24px;
-      vertical-align: middle;
-      margin-right: 0.5rem;
-    }
+  .coins-table th {
+    background: #005fa3;
+    color: white;
+  }
 
-    .btn-link {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background: #1e1e1e;
-      color: #fff;
-      border-radius: 5px;
-    }
+  .coins-table img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+  }
 
-    .community-section {
-      padding: 1.5rem;
-      background: var(--section-gradient);
-      border-radius: 8px;
-      margin: 1rem 0;
-    }
+  .btn-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #1e1e1e;
+    color: #fff;
+    border-radius: 5px;
+  }
 
-    .community-section h2 {
-      font-size: 1.5rem;
-      color: var(--text-color);
-      margin-bottom: 1rem;
-    }
+  .community-section {
+    padding: 1.5rem;
+    background: var(--section-gradient);
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
 
-    .community-links ul {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 1rem;
-    }
+  .community-section h2 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+  }
 
-    .community-links li {
-      margin-bottom: 0.5rem;
-    }
+  .community-links ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
 
-    .voting-embed {
-      width: 100%;
-      height: 500px;
-      border: none;
-    }
+  .community-links li {
+    margin-bottom: 0.5rem;
+  }
 
-    footer {
-      text-align: center;
-      margin: 2rem 0;
-      color: var(--text-color);
-      font-size: 0.9rem;
-    }
+  .voting-embed {
+    width: 100%;
+    height: 500px;
+    border: none;
+  }
 
-    .social-icons a {
-      margin: 0 0.5rem;
-      display: inline-block;
-    }
+  footer {
+    text-align: center;
+    margin: 2rem 0;
+    color: var(--text-color);
+    font-size: 0.9rem;
+  }
 
-    .social-icons img {
-      width: 28px;
-      height: 28px;
-    }
-  </style>
+  .social-icons a {
+    margin: 0 0.5rem;
+    display: inline-block;
+  }
+
+  .social-icons img {
+    width: 28px;
+    height: 28px;
+  }
+</style>
 </head>
 <body>
   <header>
