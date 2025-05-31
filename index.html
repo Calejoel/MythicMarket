@@ -6,13 +6,13 @@
   <title>Mythic Market • Godlike Micro Meme Coins</title>
 
   <!-- ========== FAVICON (optional) ========== -->
-  <!-- If you have a favicon, upload it as assets/favicon.ico and uncomment below -->
- <link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="shortcut icon" href="assets/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="MythicMarket" />
   <link rel="manifest" href="assets/site.webmanifest" />
+
   <!-- ========== Embedded CSS for styling ========== -->
   <style>
     /* ===== Basic Reset & Layout ===== */
@@ -23,10 +23,20 @@
     }
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      background-color: #e0f7fa; /* light blue background */
       color: #333;
       line-height: 1.6;
     }
+    a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #005fa3;
+      text-decoration: underline;
+    }
+
+    /* ===== Header ===== */
     header {
       background-color: #1e1e1e;
       color: #fff;
@@ -34,38 +44,17 @@
       text-align: center;
     }
     header img {
-      max-width: 120px;
+      max-width: 200px; /* larger header image */
       margin-bottom: 1rem;
     }
     header h1 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin-bottom: 0.5rem;
+      color: #ffcc00; /* accent color */
     }
     header p {
       font-size: 1rem;
       opacity: 0.8;
-    }
-
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    .section {
-      margin-bottom: 2rem;
-    }
-    .section h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: #1e1e1e;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 0.5rem;
-    }
-    .section p, .section ul {
-      margin-top: 0.75rem;
-    }
-    .section ul {
-      list-style: disc inside;
     }
 
     /* ===== Countdown Timer Styles ===== */
@@ -73,7 +62,53 @@
       font-size: 1.75rem;
       text-align: center;
       margin-top: 1rem;
-      color: #b22222;
+      color: #ff4444; /* red accent */
+    }
+
+    /* ===== Main & Sections ===== */
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem 0;
+      color: #1e1e1e;
+      background-color: #e2e2e2;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      list-style: none;
+    }
+    .section-title:hover {
+      background-color: #d4d4d4;
+    }
+    .section-content {
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      background-color: #fff;
+    }
+    /* Hide default triangle on <details> */
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+    details summary::before {
+      content: "▶";
+      display: inline-block;
+      width: 1em;
+      color: #1e1e1e;
+      margin-right: 0.3em;
+      transition: transform 0.2s ease;
+    }
+    details[open] summary::before {
+      transform: rotate(90deg);
+    }
+    details[open] summary {
+      background-color: #d4d4d4;
     }
 
     /* ===== Button / Link Styles ===== */
@@ -83,7 +118,6 @@
       padding: 0.5rem 1rem;
       background-color: #1e1e1e;
       color: #fff;
-      text-decoration: none;
       border-radius: 5px;
       transition: background-color 0.2s ease-in-out;
     }
@@ -107,6 +141,38 @@
       background-color: #eaeaea;
     }
 
+    /* ===== Voting Embed Styles ===== */
+    .voting-embed {
+      width: 100%;
+      height: 500px;
+      border: none;
+      margin-top: 1rem;
+    }
+
+    /* ===== Community & Voting Bottom Section ===== */
+    .community-section {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin: 2rem 0;
+      padding: 1rem;
+    }
+    .community-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #1e1e1e;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+    .community-links ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.75rem;
+    }
+    .community-links li {
+      margin-bottom: 0.5rem;
+    }
+
     /* ===== Footer ===== */
     footer {
       text-align: center;
@@ -120,152 +186,119 @@
 <body>
   <!-- ========== HEADER ========== -->
   <header>
-    <!-- ===== Logo ===== -->
-    <!-- Upload your logo into assets/logo.png (or change src to match your filename) -->
     <img src="assets/MythicMarketLogo.png" alt="Mythic Market Logo" />
     <h1>Mythic Market</h1>
-    <p>Launching Low Supply Micro Meme Coin Collectibles based on Mythical Gods - Voted by YOU</p>
-
-    <!-- ===== Countdown ===== -->
+    <p>Launching Low-Supply Micro Meme Coin Collectibles based on Mythical Gods — Voted by YOU</p>
     <div id="countdown">Loading countdown…</div>
   </header>
 
   <!-- ========== MAIN CONTENT ========== -->
   <main>
     <!-- ===== SECTION: About Mythic Market ===== -->
-    <section class="section" id="about">
-      <h2>About Mythic Market</h2>
-      <p>
+    <details open>
+      <summary class="section-title">About Mythic Market</summary>
+      <div class="section-content">
         <p>
-  Mythic Market is a collection of low-supply micro meme coin collectibles on Solana — each inspired by mythical gods and launched based on community votes.<br><br>
-
-  We create and deploy each token with a fixed 5,000 supply, giving them high volatility, long-term potential, and collectible scarcity.<br><br>
-
-  Launch prices start low to reward early holders, and as the limited supply tightens, scarcity increases — fueling price swings and upside.<br><br>
-
-  Tokens are paired in SOL/USDC dual pools via Meteora, or SOL-only, depending on the strategy.<br>
-  All liquidity is locked, and we will announce buybacks and burns to increase rarity and reinforce value.<br><br>
-
-  New coins drop frequently, 1-2 a week, and once we're fully rolling, No delays and high community engagement will be rewarded in future launches.<br>
-  There's no presale ever, no insider allocations — just fair, transparent meme coin launches powered by mythology and memes.<br><br>
-
-  <strong>Collect the gods. Trade the legends. Hold the volatility.</strong>
-</p>
-
-      </p>
-    </section>
+          Mythic Market is a collection of low-supply micro meme coin collectibles on Solana — each inspired by mythical gods and launched based on community votes.<br><br>
+          We create and deploy each token with a fixed 5,000 supply, giving them high volatility, long-term potential, and collectible scarcity.<br><br>
+          Launch prices start low to reward early holders, and as the limited supply tightens, scarcity increases — fueling price swings and upside.<br><br>
+          Tokens are paired in SOL/USDC dual pools via Meteora, or SOL-only, depending on the strategy.<br>
+          All liquidity is locked, and we will announce buybacks and burns to increase rarity and reinforce value.<br><br>
+          New coins drop frequently (1–2 a week), and once we're fully rolling, no delays and high community engagement will be rewarded.<br>
+          There's no presale ever, no insider allocations — just fair, transparent meme coin launches powered by mythology and memes.<br><br>
+          <strong>Collect the gods. Trade the legends. Hold the volatility.</strong>
+        </p>
+      </div>
+    </details>
 
     <!-- ===== SECTION: Token Details ===== -->
-    <section class="section" id="token-details">
-      <h2>Token Details (Next Launch)</h2>
-      <ul>
-        <li><strong>Token Name:</strong> Soon</li>
-        <li><strong>Symbol:</strong> ????</li>
-        <li><strong>Blockchain:</strong> Solana</li>
-        <li><strong>Total Supply:</strong> 5000</li>
-        <li><strong>Launch Date:</strong> <span id="mint-date">June 6, 2025 @ 19:00 UTC</span></li>
-      </ul>
-      <!-- ===== SOLANA EXPLORER LINK ===== -->
-      <!-- Replace YOUR_TOKEN_MINT_ADDRESS with your actual mint address -->
-      <a class="btn-link" href="https://explorer.solana.com/address/YOUR_TOKEN_MINT_ADDRESS" target="_blank">
-        View on Solana Explorer
-      </a>
-    </section>
+    <details open>
+      <summary class="section-title">Token Details (Next Launch)</summary>
+      <div class="section-content">
+        <ul>
+          <li><strong>Token Name:</strong> Soon</li>
+          <li><strong>Symbol:</strong> ????</li>
+          <li><strong>Blockchain:</strong> Solana</li>
+          <li><strong>Total Supply:</strong> 5,000</li>
+          <li><strong>Launch Date:</strong> <span id="mint-date">June 6, 2025 @ 19:00 UTC</span></li>
+        </ul>
+        <!-- ===== SOLANA EXPLORER LINK ===== -->
+        <!-- Replace YOUR_TOKEN_MINT_ADDRESS with your actual mint address -->
+        <a class="btn-link" href="https://explorer.solana.com/address/YOUR_TOKEN_MINT_ADDRESS" target="_blank">
+          View on Solana Explorer
+        </a>
+      </div>
+    </details>
 
     <!-- ===== SECTION: Launched Coins ===== -->
-    <section class="section" id="launched-coins">
-      <h2>Launched Coins</h2>
-      <p>
-        Tokens of Gods Mythic Market has launched so far. Click the Explorer links to see details on Solana.
-      </p>
-      <table class="coins-table">
-        <thead>
-          <tr>
-            <th>Coin Name</th>
-            <th>Symbol</th>
-            <th>Launch Date (UTC)</th>
-            <th>Explorer Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!--
-            Example row: Replace with your actual data as you launch new coins.
-            You can add more <tr>...</tr> blocks for each new coin.
-          -->
-          <tr>
-            <td>ARES</td>
-            <td>ARES</td>
-            <td>Soon</td>
-            <td>
-              <a href="https://explorer.solana.com/address/ExampleMintAddress1" target="_blank">
-                View
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>ZEUS</td>
-            <td>ZEUS</td>
-            <td>Soon</td>
-            <td>
-              <a href="https://explorer.solana.com/address/ExampleMintAddress2" target="_blank">
-                View
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>THOR</td>
-            <td>THOR</td>
-            <td>Soon</td>
-            <td>
-              <a href="https://explorer.solana.com/address/ExampleMintAddress2" target="_blank">
-                View
-              </a>
-            </td>
-          </tr>
-          <!-- Add new rows here for each coin you launch -->
-        </tbody>
-      </table>
-      <iframe src="https://strawpoll.com/embed/GeZARamWbyV" style="width:100%;height:480px;border:none;"></iframe>
-    </section>
+    <details open>
+      <summary class="section-title">Launched Coins</summary>
+      <div class="section-content">
+        <p>Tokens Mythic Market has launched so far. Click the Explorer links to see details on Solana.</p>
+        <table class="coins-table">
+          <thead>
+            <tr>
+              <th>Coin Name</th>
+              <th>Symbol</th>
+              <th>Launch Date (UTC)</th>
+              <th>Explorer Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Example rows; update as you launch new coins -->
+            <tr>
+              <td>ARES</td>
+              <td>ARES</td>
+              <td>Soon</td>
+              <td>
+                <a href="https://explorer.solana.com/address/ExampleMintAddress1" target="_blank">
+                  View
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>ZEUS</td>
+              <td>ZEUS</td>
+              <td>Soon</td>
+              <td>
+                <a href="https://explorer.solana.com/address/ExampleMintAddress2" target="_blank">
+                  View
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>THOR</td>
+              <td>THOR</td>
+              <td>Soon</td>
+              <td>
+                <a href="https://explorer.solana.com/address/ExampleMintAddress3" target="_blank">
+                  View
+                </a>
+              </td>
+            </tr>
+            <!-- Add new <tr> blocks here for each launched coin -->
+          </tbody>
+        </table>
+      </div>
+    </details>
 
-    <!-- ===== SECTION: Join the Community ===== -->
-    <section class="section" id="community">
-      <h2>Join the Community</h2>
-      <p>
-        Connect with fellow Mythic Market holders, discuss strategies, and stay up-to-date on the latest announcements:
-      </p>
-      <ul>
-        <li>
-          <a href="https://t.me/MythicalMarket" target="_blank">Telegram</a>
-        </li>
-        <li>
-          <a href="https://x.com/Mythic_Market" target="_blank">Twitter (X)</a>
-        </li>
-        <li>
-          <a href="https://discord.gg/g5wBE95Zpc" target="_blank">Discord</a>
-        </li>
-      </ul>
-    </section>
-
-    <!-- ===== SECTION: Quick Links ===== -->
-    <section class="section" id="links">
-      <h2>Quick Links</h2>
-      <ul>
-        <li><a href="#about">About Mythic Market</a></li>
-        <li><a href="#token-details">Token Details (Next Launch)</a></li>
-        <li><a href="#launched-coins">Launched Coins</a></li>
-        <li><a href="#community">Join the Community</a></li>
-        <li>
-          <a href="https://strawpoll.com/GeZARamWbyV" target="_blank">
-            Vote (Strawpoll)
-          </a>
-        </li>
-        <li><a href="https://linktr.ee/Mythic_Market" target="_blank">Linktree</a></li>
-        <!-- Optional placeholders you can remove or replace: -->
-        <!-- <li><a href="https://mythicmarket.com/whitepaper.pdf" target="_blank">Whitepaper (PDF)</a></li> -->
-        <!-- <li><a href="https://github.com/mythicmarket/mythic-market-contracts" target="_blank">GitHub Contracts</a></li> -->
-        <!-- <li><a href="https://opensea.io/collection/mythic-market" target="_blank">OpenSea Collection</a></li> -->
-      </ul>
+    <!-- ===== SECTION: Community & Voting (Always Visible at Bottom) ===== -->
+    <section class="community-section">
+      <h2>Join the Community & Vote</h2>
+      <div class="community-links">
+        <p>Connect with fellow Mythic Market holders, discuss strategies, and cast your vote for the next god-themed coin:</p>
+        <ul>
+          <li><a href="https://t.me/MythicalMarket" target="_blank">Telegram</a></li>
+          <li><a href="https://x.com/Mythic_Market" target="_blank">Twitter (X)</a></li>
+          <li><a href="https://discord.gg/g5wBE95Zpc" target="_blank">Discord</a></li>
+        </ul>
+      </div>
+      <!-- ===== EMBED STRAWPOLL ===== -->
+      <iframe
+        src="https://strawpoll.com/embed/GeZARamWbyV"
+        class="voting-embed"
+        allowfullscreen
+      ></iframe>
     </section>
   </main>
 
@@ -277,7 +310,6 @@
   <!-- ========== COUNTDOWN TIMER SCRIPT ========== -->
   <script>
     // ---------- Set your target date/time here ----------
-    // You already changed this to June 6 2025 19:00 UTC
     const targetDate = new Date("2025-06-06T19:00:00Z").getTime();
 
     // Update countdown every second
@@ -291,13 +323,11 @@
         return;
       }
 
-      // Calculate days, hours, minutes, seconds
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((distance / (1000 * 60)) % 60);
       const seconds = Math.floor((distance / 1000) % 60);
 
-      // Display result
       document.getElementById("countdown").innerText =
         `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }, 1000);
