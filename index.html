@@ -15,22 +15,24 @@
 
   <!-- ========== Embedded CSS for styling ========== -->
   <style>
-    /* ===== Basic Reset & Layout ===== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: Arial, sans-serif;
-      background-color: #e0f7fa; /* light blue background */
+      background-color: #00d4ff; /* neon blue */
       color: #333;
       line-height: 1.6;
     }
+
     a {
       color: #0077cc;
       text-decoration: none;
     }
+
     a:hover {
       color: #005fa3;
       text-decoration: underline;
@@ -38,80 +40,76 @@
 
     /* ===== Header ===== */
     header {
-      background-color: #1e1e1e;
+      background-color: #000;
       color: #fff;
       padding: 2rem 1rem;
       text-align: center;
     }
+
     header img {
-      max-width: 200px; /* larger header image */
-      margin-bottom: 1rem;
+      max-width: 240px;
+      margin-bottom: 0.5rem;
     }
+
     header h1 {
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
-      color: #ffcc00; /* accent color */
-    }
-    header p {
-      font-size: 1rem;
-      opacity: 0.8;
+      color: #fff;
     }
 
-    /* ===== Countdown Timer Styles ===== */
+    header p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    /* ===== Countdown Timer ===== */
     #countdown {
       font-size: 1.75rem;
       text-align: center;
       margin-top: 1rem;
-      color: #ff4444; /* red accent */
+      color: #ff4444;
     }
 
-    /* ===== Main & Sections ===== */
+    /* ===== Main & Section Styling ===== */
     main {
       max-width: 800px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
+
     .section-title {
       font-size: 1.5rem;
-      cursor: pointer;
       padding: 0.5rem 0;
-      color: #1e1e1e;
       background-color: #e2e2e2;
+      color: #1e1e1e;
       border: 1px solid #ccc;
       border-radius: 4px;
       margin-bottom: 0.5rem;
-      list-style: none;
     }
-    .section-title:hover {
-      background-color: #d4d4d4;
-    }
+
     .section-content {
       padding: 1rem;
+      background-color: #fff;
       border: 1px solid #ccc;
       border-radius: 4px;
       margin-bottom: 1.5rem;
-      background-color: #fff;
-    }
-    /* Hide default triangle on <details> */
-    details summary::-webkit-details-marker {
-      display: none;
-    }
-    details summary::before {
-      content: "▶";
-      display: inline-block;
-      width: 1em;
-      color: #1e1e1e;
-      margin-right: 0.3em;
-      transition: transform 0.2s ease;
-    }
-    details[open] summary::before {
-      transform: rotate(90deg);
-    }
-    details[open] summary {
-      background-color: #d4d4d4;
     }
 
-    /* ===== Button / Link Styles ===== */
+    /* ===== Token Details List Fix ===== */
+    .token-details-list {
+      list-style-position: inside;
+      padding-left: 0;
+      margin-left: 0;
+    }
+
+    .token-details-list li {
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+      padding-left: 0.5rem;
+      text-indent: -0.5rem;
+    }
+
+    /* ===== Button Styles ===== */
     .btn-link {
       display: inline-block;
       margin: 0.5rem 0;
@@ -121,35 +119,30 @@
       border-radius: 5px;
       transition: background-color 0.2s ease-in-out;
     }
+
     .btn-link:hover {
       background-color: #333;
     }
 
-    /* ===== Launched Coins Table Styles ===== */
+    /* ===== Coins Table ===== */
     .coins-table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 1rem;
     }
+
     .coins-table th,
     .coins-table td {
       border: 1px solid #ccc;
       padding: 0.5rem;
       text-align: left;
     }
+
     .coins-table th {
       background-color: #eaeaea;
     }
 
-    /* ===== Voting Embed Styles ===== */
-    .voting-embed {
-      width: 100%;
-      height: 500px;
-      border: none;
-      margin-top: 1rem;
-    }
-
-    /* ===== Community & Voting Bottom Section ===== */
+    /* ===== Community & Voting Section ===== */
     .community-section {
       background-color: #fff;
       border: 1px solid #ccc;
@@ -157,6 +150,7 @@
       margin: 2rem 0;
       padding: 1rem;
     }
+
     .community-section h2 {
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
@@ -164,13 +158,22 @@
       border-bottom: 2px solid #ddd;
       padding-bottom: 0.5rem;
     }
+
     .community-links ul {
       list-style: none;
       padding-left: 0;
       margin-top: 0.75rem;
     }
+
     .community-links li {
       margin-bottom: 0.5rem;
+    }
+
+    .voting-embed {
+      width: 100%;
+      height: 500px;
+      border: none;
+      margin-top: 1rem;
     }
 
     /* ===== Footer ===== */
@@ -194,9 +197,9 @@
 
   <!-- ========== MAIN CONTENT ========== -->
   <main>
-    <!-- ===== SECTION: About Mythic Market ===== -->
-    <details open>
-      <summary class="section-title">About Mythic Market</summary>
+    <!-- ===== About Mythic Market ===== -->
+    <div>
+      <div class="section-title">About Mythic Market</div>
       <div class="section-content">
         <p>
           Mythic Market is a collection of low-supply micro meme coin collectibles on Solana — each inspired by mythical gods and launched based on community votes.<br><br>
@@ -209,30 +212,28 @@
           <strong>Collect the gods. Trade the legends. Hold the volatility.</strong>
         </p>
       </div>
-    </details>
+    </div>
 
-    <!-- ===== SECTION: Token Details ===== -->
-    <details open>
-      <summary class="section-title">Token Details (Next Launch)</summary>
+    <!-- ===== Token Details ===== -->
+    <div>
+      <div class="section-title">Token Details (Next Launch)</div>
       <div class="section-content">
-        <ul>
+        <ul class="token-details-list">
           <li><strong>Token Name:</strong> Soon</li>
           <li><strong>Symbol:</strong> ????</li>
           <li><strong>Blockchain:</strong> Solana</li>
           <li><strong>Total Supply:</strong> 5,000</li>
           <li><strong>Launch Date:</strong> <span id="mint-date">June 6, 2025 @ 19:00 UTC</span></li>
         </ul>
-        <!-- ===== SOLANA EXPLORER LINK ===== -->
-        <!-- Replace YOUR_TOKEN_MINT_ADDRESS with your actual mint address -->
         <a class="btn-link" href="https://explorer.solana.com/address/YOUR_TOKEN_MINT_ADDRESS" target="_blank">
           View on Solana Explorer
         </a>
       </div>
-    </details>
+    </div>
 
-    <!-- ===== SECTION: Launched Coins ===== -->
-    <details open>
-      <summary class="section-title">Launched Coins</summary>
+    <!-- ===== Launched Coins ===== -->
+    <div>
+      <div class="section-title">Launched Coins</div>
       <div class="section-content">
         <p>Tokens Mythic Market has launched so far. Click the Explorer links to see details on Solana.</p>
         <table class="coins-table">
@@ -245,44 +246,30 @@
             </tr>
           </thead>
           <tbody>
-            <!-- Example rows; update as you launch new coins -->
             <tr>
               <td>ARES</td>
               <td>ARES</td>
               <td>Soon</td>
-              <td>
-                <a href="https://explorer.solana.com/address/ExampleMintAddress1" target="_blank">
-                  View
-                </a>
-              </td>
+              <td><a href="https://explorer.solana.com/address/ExampleMintAddress1" target="_blank">View</a></td>
             </tr>
             <tr>
               <td>ZEUS</td>
               <td>ZEUS</td>
               <td>Soon</td>
-              <td>
-                <a href="https://explorer.solana.com/address/ExampleMintAddress2" target="_blank">
-                  View
-                </a>
-              </td>
+              <td><a href="https://explorer.solana.com/address/ExampleMintAddress2" target="_blank">View</a></td>
             </tr>
             <tr>
               <td>THOR</td>
               <td>THOR</td>
               <td>Soon</td>
-              <td>
-                <a href="https://explorer.solana.com/address/ExampleMintAddress3" target="_blank">
-                  View
-                </a>
-              </td>
+              <td><a href="https://explorer.solana.com/address/ExampleMintAddress3" target="_blank">View</a></td>
             </tr>
-            <!-- Add new <tr> blocks here for each launched coin -->
           </tbody>
         </table>
       </div>
-    </details>
+    </div>
 
-    <!-- ===== SECTION: Community & Voting (Always Visible at Bottom) ===== -->
+    <!-- ===== Community & Voting Section ===== -->
     <section class="community-section">
       <h2>Join the Community & Vote</h2>
       <div class="community-links">
@@ -293,7 +280,6 @@
           <li><a href="https://discord.gg/g5wBE95Zpc" target="_blank">Discord</a></li>
         </ul>
       </div>
-      <!-- ===== EMBED STRAWPOLL ===== -->
       <iframe
         src="https://strawpoll.com/embed/GeZARamWbyV"
         class="voting-embed"
@@ -302,17 +288,15 @@
     </section>
   </main>
 
-  <!-- ========== FOOTER ========== -->
+  <!-- ===== Footer ===== -->
   <footer>
     © 2025 Mythic Market. Not financial advice. DYOR.
   </footer>
 
-  <!-- ========== COUNTDOWN TIMER SCRIPT ========== -->
+  <!-- ===== Countdown Script ===== -->
   <script>
-    // ---------- Set your target date/time here ----------
     const targetDate = new Date("2025-06-06T19:00:00Z").getTime();
 
-    // Update countdown every second
     const countdownInterval = setInterval(() => {
       const now = new Date().getTime();
       const distance = targetDate - now;
