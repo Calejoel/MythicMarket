@@ -42,7 +42,6 @@
       color: #00c2ff;
       text-decoration: none;
     }
-
     a:hover {
       text-decoration: underline;
     }
@@ -115,11 +114,14 @@
       margin-top: 0.5rem;
     }
 
-    /* Hide default markers in all browsers */
+    /* Hide default markers in all major browsers */
     details summary::marker {
       display: none;
     }
     details summary::-webkit-details-marker {
+      display: none;
+    }
+    details summary::-moz-list-marker {
       display: none;
     }
 
@@ -205,10 +207,6 @@
       margin: 2rem 0;
       color: var(--text-color);
       font-size: 0.9rem;
-    }
-
-    .social-icons {
-      margin-top: 1rem;
     }
 
     .social-icons a {
@@ -348,6 +346,7 @@
       localStorage.setItem('theme', next);
     });
   </script>
+
   <script src="live-tokens.js"></script>
 </body>
 </html>
