@@ -1,69 +1,92 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mythic Market • Godlike Micro Meme Coins</title>
+  <link rel="icon" href="assets/favicon.ico" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/favicon-96x96.png" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="manifest" href="assets/site.webmanifest" />
-
-  <!-- Styles -->
   <style>
     :root {
-      --bg-gradient: linear-gradient(to bottom right, #00f0ff, #0066ff);
-      --section-bg: linear-gradient(to bottom right, #d2f4ff, #b2e0ff);
-      --section-header-bg: linear-gradient(to right, #003366, #004488);
+      --bg-gradient: linear-gradient(135deg, #00e0ff, #006eff);
+      --section-gradient: linear-gradient(135deg, #d0f4ff, #a0d9ff);
+      --header-gradient: linear-gradient(135deg, #004080, #001f3f);
       --text-color: #000;
+      --section-bg: #f0f8ff;
+      --header-text: #fff;
     }
 
     [data-theme="dark"] {
-      --bg-gradient: linear-gradient(to bottom right, #001c33, #003366);
-      --section-bg: linear-gradient(to bottom right, #002a44, #004466);
-      --section-header-bg: linear-gradient(to right, #000000, #111111);
+      --bg-gradient: linear-gradient(135deg, #001f3f, #004080);
+      --section-gradient: linear-gradient(135deg, #003366, #002244);
+      --header-gradient: linear-gradient(135deg, #000c1a, #001f3f);
       --text-color: #fff;
+      --section-bg: #0c1b2a;
+      --header-text: #fff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
       background: var(--bg-gradient);
       color: var(--text-color);
-      transition: background 0.3s ease, color 0.3s ease;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
     }
 
     a {
-      color: #ffcc00;
+      color: #00c2ff;
       text-decoration: none;
     }
+
     a:hover {
       text-decoration: underline;
     }
 
     header {
-      background-color: #000;
-      color: white;
-      padding: 2rem 1rem;
+      position: relative;
+      background: #000;
+      color: var(--header-text);
       text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    #theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #333;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
     }
 
     header img {
       max-width: 220px;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     header h1 {
+      color: #fff;
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
     }
 
+    header p {
+      opacity: 0.8;
+      font-size: 1rem;
+    }
+
     #countdown {
       font-size: 1.5rem;
+      color: #ffcc00;
       margin-top: 1rem;
-      color: #ff4444;
     }
 
     main {
@@ -73,45 +96,43 @@
     }
 
     details {
-      margin-bottom: 1rem;
-      border-radius: 6px;
-      overflow: hidden;
+      margin-bottom: 1.5rem;
     }
 
-    summary {
-      background: var(--section-header-bg);
-      color: white;
+    summary.section-title {
+      font-size: 1.5rem;
       padding: 0.75rem 1rem;
-      font-size: 1.2rem;
+      background: var(--header-gradient);
+      color: var(--header-text);
+      border-radius: 8px;
       cursor: pointer;
     }
 
     .section-content {
-      background: var(--section-bg);
       padding: 1rem;
-      font-size: 1rem;
+      background: var(--section-gradient);
+      border-radius: 8px;
+      margin-top: 0.5rem;
     }
 
-    summary::marker {
+    details summary::-webkit-details-marker {
       display: none;
     }
 
-    details[open] summary::before {
-      content: "▼ ";
-    }
-
     details summary::before {
-      content: "▶ ";
+      content: "▶";
+      display: inline-block;
+      margin-right: 0.5em;
+      transform: rotate(0deg);
+      transition: transform 0.2s ease-in-out;
     }
 
-    .btn-link {
-      display: inline-block;
-      margin-top: 0.75rem;
-      padding: 0.5rem 1rem;
-      background-color: #000;
-      color: #fff;
-      border-radius: 5px;
-      text-decoration: none;
+    details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    ul {
+      padding-left: 1.2rem;
     }
 
     .coins-table {
@@ -120,74 +141,108 @@
       margin-top: 1rem;
     }
 
-    .coins-table th,
-    .coins-table td {
-      padding: 0.5rem;
+    .coins-table th, .coins-table td {
+      padding: 0.75rem;
       border-bottom: 1px solid #ccc;
-      color: inherit;
     }
 
-    .coin-name {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+    .coins-table th {
+      background: #005fa3;
+      color: white;
     }
 
-    .coin-name img {
+    .coins-table img {
       width: 24px;
       height: 24px;
-      border-radius: 50%;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
+
+    .btn-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #1e1e1e;
+      color: #fff;
+      border-radius: 5px;
+    }
+
+    .community-section {
+      padding: 1.5rem;
+      background: var(--section-gradient);
+      border-radius: 8px;
+      margin: 3rem auto 2rem;
+    }
+
+    .community-section h2 {
+      font-size: 1.5rem;
+      color: var(--text-color);
+      margin-bottom: 1rem;
+    }
+
+    .community-links ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1rem;
+    }
+
+    .community-links li {
+      margin-bottom: 0.5rem;
     }
 
     .voting-embed {
       width: 100%;
-      height: 480px;
+      height: 500px;
       border: none;
-      margin-top: 1rem;
     }
 
     footer {
       text-align: center;
-      margin: 3rem 0 1rem;
-      color: inherit;
+      margin: 2rem 0;
+      color: var(--text-color);
+      font-size: 0.9rem;
     }
 
-    .footer-icons a {
+    .social-icons {
+      margin-top: 1rem;
+    }
+
+    .social-icons a {
       margin: 0 0.5rem;
       display: inline-block;
-      font-size: 1.4rem;
+    }
+
+    .social-icons img {
+      width: 28px;
+      height: 28px;
     }
   </style>
 </head>
-
 <body>
-  <!-- Header -->
   <header>
+    <button id="theme-toggle">Toggle Dark Mode</button>
     <img src="assets/MythicMarketLogo.png" alt="Mythic Market Logo" />
     <h1>Mythic Market</h1>
     <p>Launching Low-Supply Micro Meme Coin Collectibles based on Mythical Gods — Voted by YOU</p>
     <div id="countdown">Loading countdown…</div>
   </header>
 
-  <!-- Main Content -->
   <main>
-
-    <!-- About -->
     <details open>
-      <summary>About Mythic Market</summary>
+      <summary class="section-title">About Mythic Market</summary>
       <div class="section-content">
         <p>
-          Mythic Market is a collection of low-supply micro meme coin collectibles on Solana — each inspired by mythical gods and launched based on community votes.
-          We create and deploy each token with a fixed 5,000 supply, giving them high volatility, long-term potential, and collectible scarcity.
-          Launch prices start low to reward early holders. All liquidity is locked, and we announce buybacks and burns to increase rarity and reinforce value.
+          Mythic Market is a collection of low-supply micro meme coin collectibles on Solana — each inspired by mythical gods and launched based on community votes.<br><br>
+          We create and deploy each token with a fixed 5,000 supply, giving them high volatility, long-term potential, and collectible scarcity.<br><br>
+          Launch prices start low to reward early holders, and as the limited supply tightens, scarcity increases — fueling price swings and upside.<br><br>
+          Tokens are paired in SOL/USDC dual pools via Meteora, or SOL-only, depending on the strategy. Liquidity is locked. Buybacks and burns increase rarity.<br><br>
           <strong>Collect the gods. Trade the legends. Hold the volatility.</strong>
         </p>
       </div>
     </details>
 
-    <!-- Token Details -->
     <details open>
-      <summary>Token Details (Next Launch)</summary>
+      <summary class="section-title">Token Details (Next Launch)</summary>
       <div class="section-content">
         <ul>
           <li><strong>Token Name:</strong> Soon</li>
@@ -196,14 +251,16 @@
           <li><strong>Total Supply:</strong> 5,000</li>
           <li><strong>Launch Date:</strong> <span id="mint-date">June 6, 2025 @ 19:00 UTC</span></li>
         </ul>
-        <a class="btn-link" href="https://explorer.solana.com/address/YOUR_TOKEN_MINT_ADDRESS" target="_blank">View on Solana Explorer</a>
+        <a class="btn-link" href="https://explorer.solana.com/address/YOUR_TOKEN_MINT_ADDRESS" target="_blank">
+          View on Solana Explorer
+        </a>
       </div>
     </details>
 
-    <!-- Launched Coins -->
     <details open>
-      <summary>Launched Coins</summary>
+      <summary class="section-title">Launched Coins</summary>
       <div class="section-content">
+        <p>Tokens Mythic Market has launched so far. Click the Explorer links to see them on Solana:</p>
         <table class="coins-table">
           <thead>
             <tr>
@@ -215,80 +272,91 @@
           </thead>
           <tbody>
             <tr>
-              <td class="coin-name"><img src="assets/ares.png" alt="ARES" />ARES</td>
+              <td><img src="assets/ARES.png" alt="ARES" />ARES</td>
               <td>ARES</td>
               <td>Soon</td>
-              <td><a href="#">View</a></td>
+              <td><a href="https://explorer.solana.com/address/ExampleMintAddress1" target="_blank">View</a></td>
             </tr>
             <tr>
-              <td class="coin-name"><img src="assets/zeus.png" alt="ZEUS" />ZEUS</td>
+              <td><img src="assets/ZEUS.png" alt="ZEUS" />ZEUS</td>
               <td>ZEUS</td>
               <td>Soon</td>
-              <td><a href="#">View</a></td>
+              <td><a href="https://explorer.solana.com/address/ExampleMintAddress2" target="_blank">View</a></td>
             </tr>
             <tr>
-              <td class="coin-name"><img src="assets/thor.png" alt="THOR" />THOR</td>
+              <td><img src="assets/THOR.png" alt="THOR" />THOR</td>
               <td>THOR</td>
               <td>Soon</td>
-              <td><a href="#">View</a></td>
+              <td><a href="https://explorer.solana.com/address/ExampleMintAddress3" target="_blank">View</a></td>
             </tr>
           </tbody>
         </table>
       </div>
     </details>
 
-    <!-- Community Section -->
     <details open>
-      <summary>Join the Community & Vote</summary>
-      <div class="section-content">
-        <p>Connect with the Mythic Market tribe, vote for the next god, and ride the chaos:</p>
-        <ul>
-          <li><a href="https://t.me/MythicalMarket" target="_blank">Telegram</a></li>
-          <li><a href="https://x.com/Mythic_Market" target="_blank">Twitter (X)</a></li>
-          <li><a href="https://discord.gg/g5wBE95Zpc" target="_blank">Discord</a></li>
-        </ul>
+      <summary class="section-title">Join the Community & Vote</summary>
+      <div class="section-content community-section">
+        <p>Connect with fellow Mythic Market holders, discuss strategies, and cast your vote for the next god-themed coin:</p>
+        <div class="community-links">
+          <ul>
+            <li><a href="https://t.me/MythicalMarket" target="_blank">Telegram</a></li>
+            <li><a href="https://x.com/Mythic_Market" target="_blank">Twitter (X)</a></li>
+            <li><a href="https://discord.gg/g5wBE95Zpc" target="_blank">Discord</a></li>
+          </ul>
+        </div>
         <iframe src="https://strawpoll.com/embed/GeZARamWbyV" class="voting-embed" allowfullscreen></iframe>
       </div>
     </details>
   </main>
 
-  <!-- Footer -->
   <footer>
-    <div class="footer-icons">
-      <a href="https://x.com/Mythic_Market" target="_blank">🐦</a>
-      <a href="https://t.me/MythicalMarket" target="_blank">💬</a>
-      <a href="https://discord.gg/g5wBE95Zpc" target="_blank">👾</a>
-    </div>
     <p>© 2025 Mythic Market. Not financial advice. DYOR.</p>
+    <div class="social-icons">
+      <a href="https://x.com/Mythic_Market" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
+      <a href="https://t.me/MythicalMarket" target="_blank"><img src="assets/telegram-icon.png" alt="Telegram" /></a>
+      <a href="https://discord.gg/g5wBE95Zpc" target="_blank"><img src="assets/discord-icon.png" alt="Discord" /></a>
+    </div>
   </footer>
 
-  <!-- Countdown Timer -->
   <script>
-    const targetDate = new Date("2025-06-06T19:00:00Z").getTime();
-    const countdownInterval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+    const countdownTarget = new Date("2025-06-06T19:00:00Z").getTime();
+    const countdown = document.getElementById("countdown");
 
-      if (distance <= 0) {
-        clearInterval(countdownInterval);
-        document.getElementById("countdown").innerText = "🚀 Mythic Market Is Live! 🚀";
+    setInterval(() => {
+      const now = Date.now();
+      const diff = countdownTarget - now;
+
+      if (diff <= 0) {
+        countdown.innerText = "🚀 Mythic Market Is Live!";
         return;
       }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((distance / (1000 * 60)) % 60);
-      const seconds = Math.floor((distance / 1000) % 60);
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
 
-      document.getElementById("countdown").innerText =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      countdown.innerText = `${d}d ${h}h ${m}m ${s}s`;
     }, 1000);
 
-    // Auto-apply dark mode if user prefers
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (prefersDark) {
-      document.documentElement.setAttribute('data-theme', 'dark');
+    // Dark mode toggle
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const saved = localStorage.getItem('theme');
+
+    if (saved) {
+      root.setAttribute('data-theme', saved);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      root.setAttribute('data-theme', 'dark');
     }
+
+    themeToggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
   </script>
 </body>
 </html>
