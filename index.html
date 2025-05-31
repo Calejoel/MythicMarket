@@ -115,9 +115,14 @@
       margin-top: 0.5rem;
     }
 
+    /* Hide default markers in all browsers */
+    details summary::marker {
+      display: none;
+    }
     details summary::-webkit-details-marker {
       display: none;
     }
+
 
     details summary::before {
       content: "▶";
