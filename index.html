@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mythic Market • Solana Meme Coin</title>
+
+  <!-- ========== FAVICON (optional) ========== -->
+  <!-- If you have a favicon, upload it as assets/favicon.ico and uncomment below -->
+  <!-- <link rel="icon" href="assets/favicon.ico" type="image/x-icon" /> -->
+
+  <!-- ========== Embedded CSS for styling ========== -->
+  <style>
+    /* ===== Basic Reset & Layout ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #1e1e1e;
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    header img {
+      max-width: 120px;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    .section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #1e1e1e;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.5rem;
+    }
+    .section p, .section ul {
+      margin-top: 0.75rem;
+    }
+    .section ul {
+      list-style: disc inside;
+    }
+
+    /* ===== Countdown Timer Styles ===== */
+    #countdown {
+      font-size: 1.75rem;
+      text-align: center;
+      margin-top: 1rem;
+      color: #b22222;
+    }
+
+    /* ===== Button / Link Styles ===== */
+    .btn-link {
+      display: inline-block;
+      margin: 0.5rem 0;
+      padding: 0.5rem 1rem;
+      background-color: #1e1e1e;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.2s ease-in-out;
+    }
+    .btn-link:hover {
+      background-color: #333;
+    }
+
+    /* ===== Launched Coins Table Styles ===== */
+    .coins-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .coins-table th,
+    .coins-table td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    .coins-table th {
+      background-color: #eaeaea;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      margin: 3rem 0 1rem 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ========== HEADER ========== -->
+  <header>
+    <!-- ===== Logo ===== -->
+    <!-- Upload your logo into assets/logo.png (or change src to match your filename) -->
+    <img src="assets/logo.png" alt="Mythic Market Logo" />
+    <h1>Mythic Market</h1>
+    <p>Official Solana Meme Coin Group</p>
+
+    <!-- ===== Countdown ===== -->
+    <div id="countdown">Loading countdown…</div>
+  </header>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main>
+    <!-- ===== SECTION: About Mythic Market ===== -->
+    <section class="section" id="about">
+      <h2>About Mythic Market</h2>
+      <p>
+        Mythic Market is a community-driven Solana meme coin project launching on the Solana blockchain. Our mission is to bring together collectors, traders, and meme enthusiasts under one roof. Join us as we embark on this epic journey—powered by strong community governance, playful meme culture, and the blazing speed of Solana.
+      </p>
+    </section>
+
+    <!-- ===== SECTION: Token Details ===== -->
+    <section class="section" id="token-details">
+      <h2>Token Details (Next Launch)</h2>
+      <ul>
+        <li><strong>Token Name:</strong> Mythic Market (MMKT)</li>
+        <li><strong>Symbol:</strong> MMKT</li>
+        <li><strong>Blockchain:</strong> Solana</li>
+        <li><strong>Total Supply:</strong> 1,000,000 MMKT</li>
+        <li><strong>Mint Date:</strong> <span id="mint-date">June 6, 2025 @ 19:00 UTC</span></li>
+        <li><strong>Token Standard:</strong> SPL Fungible Token</li>
+      </ul>
+      <!-- ===== SOLANA EXPLORER LINK ===== -->
+      <!-- Replace YOUR_TOKEN_MINT_ADDRESS with your actual mint address -->
+      <a class="btn-link" href="https://explorer.solana.com/address/YOUR_TOKEN_MINT_ADDRESS" target="_blank">
+        View on Solana Explorer
+      </a>
+    </section>
+
+    <!-- ===== SECTION: Launched Coins ===== -->
+    <section class="section" id="launched-coins">
+      <h2>Launched Coins</h2>
+      <p>
+        Below is a list of all coins Mythic Market has launched so far. Click the Explorer links to see details on Solana.
+      </p>
+      <table class="coins-table">
+        <thead>
+          <tr>
+            <th>Coin Name</th>
+            <th>Symbol</th>
+            <th>Launch Date (UTC)</th>
+            <th>Explorer Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--
+            Example row: Replace with your actual data as you launch new coins.
+            You can add more <tr>...</tr> blocks for each new coin.
+          -->
+          <tr>
+            <td>Mythic Phoenix</td>
+            <td>MPHX</td>
+            <td>April 1, 2025</td>
+            <td>
+              <a href="https://explorer.solana.com/address/ExampleMintAddress1" target="_blank">
+                View
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>Mythic Hydra</td>
+            <td>MHYD</td>
+            <td>May 1, 2025</td>
+            <td>
+              <a href="https://explorer.solana.com/address/ExampleMintAddress2" target="_blank">
+                View
+              </a>
+            </td>
+          </tr>
+          <!-- Add new rows here for each coin you launch -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== SECTION: Join the Community ===== -->
+    <section class="section" id="community">
+      <h2>Join the Community</h2>
+      <p>
+        Connect with fellow Mythic Market holders, discuss strategies, and stay up-to-date on the latest announcements:
+      </p>
+      <ul>
+        <li>
+          <a href="https://t.me/MythicalMarket" target="_blank">Telegram</a>
+        </li>
+        <li>
+          <a href="https://x.com/Mythic_Market" target="_blank">Twitter (X)</a>
+        </li>
+        <li>
+          <a href="https://discord.gg/g5wBE95Zpc" target="_blank">Discord</a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== SECTION: Quick Links ===== -->
+    <section class="section" id="links">
+      <h2>Quick Links</h2>
+      <ul>
+        <li><a href="#about">About Mythic Market</a></li>
+        <li><a href="#token-details">Token Details (Next Launch)</a></li>
+        <li><a href="#launched-coins">Launched Coins</a></li>
+        <li><a href="#community">Join the Community</a></li>
+        <li>
+          <a href="https://strawpoll.com/GeZARamWbyV" target="_blank">
+            Vote (Strawpoll)
+          </a>
+        </li>
+        <li><a href="https://linktr.ee/Mythic_Market" target="_blank">Linktree</a></li>
+        <!-- Optional placeholders you can remove or replace: -->
+        <!-- <li><a href="https://mythicmarket.com/whitepaper.pdf" target="_blank">Whitepaper (PDF)</a></li> -->
+        <!-- <li><a href="https://github.com/mythicmarket/mythic-market-contracts" target="_blank">GitHub Contracts</a></li> -->
+        <!-- <li><a href="https://opensea.io/collection/mythic-market" target="_blank">OpenSea Collection</a></li> -->
+      </ul>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    © 2025 Mythic Market • All rights reserved.
+  </footer>
+
+  <!-- ========== COUNTDOWN TIMER SCRIPT ========== -->
+  <script>
+    // ---------- Set your target date/time here ----------
+    // You already changed this to June 6 2025 19:00 UTC
+    const targetDate = new Date("2025-06-06T19:00:00Z").getTime();
+
+    // Update countdown every second
+    const countdownInterval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        clearInterval(countdownInterval);
+        document.getElementById("countdown").innerText = "🚀 Mythic Market Is Live! 🚀";
+        return;
+      }
+
+      // Calculate days, hours, minutes, seconds
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      // Display result
+      document.getElementById("countdown").innerText =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  </script>
+</body>
+</html>
