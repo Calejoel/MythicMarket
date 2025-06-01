@@ -238,6 +238,11 @@
     <img src="assets/MythicMarketLogo.png" alt="Mythic Market Logo" />
     <h1>Mythic Market</h1>
     <p>Launching Low‐Supply Micro Meme Coin Collectibles based on Mythical Gods — Voted by YOU</p>
+    <div class="social-icons">
+      <a href="https://x.com/Mythic_Market" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
+      <a href="https://t.me/MythicalMarket" target="_blank"><img src="assets/telegram-icon.png" alt="Telegram" /></a>
+      <a href="https://discord.gg/g5wBE95Zpc" target="_blank"><img src="assets/discord-icon.png" alt="Discord" /></a>
+    </div>
   </header>
 
   <main>
@@ -250,7 +255,8 @@
           We deploy each token with a fixed 5,000 supply, giving them high volatility, long‐term potential, and collectible scarcity.<br><br>
           Launch prices start low to reward early holders; as supply tightens, scarcity grows—fueling price swings and upside.<br><br>
           Tokens pair in SOL/USDC dual pools via Meteora (or SOL‐only, depending on strategy). Liquidity is locked; buybacks and burns increase rarity.<br><br>
-          <strong>Collect the gods. Trade the legends. Hold the volatility.</strong>
+          <strong>Collect the gods. Trade the legends. Hold the volatility.</strong><br><br>
+          <i>Don't forget to join the Discord, Telegram, and follow on X (Twitter)</i>
         </p>
       </div>
     </details>
@@ -278,8 +284,9 @@
       <summary class="section-title">Vote for the Next God</summary>
       <div class="section-content">
         <p>
-          Select from a community-curated list of mythic gods. One of top voted gods will be the next micro meme coin collectible launched on Mythic Market! You get 10 votes every week.
+          Select from a community-curated list of mythic gods. One of top voted gods will be the next micro meme coin collectible launched on Mythic Market! You get 10 votes every week. <br><br>
            <strong>How to Vote</strong>
+          <div style="padding: 0.5rem 1rem;">
             <ul>
               <li>Scroll the embedded list below.</li>
               <li>Select up to 10 gods you want to see launched next.</li>
@@ -346,21 +353,21 @@
         image: "assets/ARES.png",
         mint: "So11111111111111111111111111111111111111112",
         // Launch date in ISO 8601 (UTC):
-        launchDate: "2025-06-01T18:00:00Z"
+        launchDate: "2025-06-06T19:00:00Z"
       },
       {
         name: "ZEUS",
         symbol: "ZEUS",
         image: "assets/ZEUS.png",
         mint: "null",
-        launchDate: "2025-06-01T18:00:00Z"
+        launchDate: "2025-06-013T19:00:00Z"
       },
       {
         name: "THOR",
         symbol: "THOR",
         image: "assets/THOR.png",
         mint: "null",
-        launchDate: "2025-06-20T19:00:00Z"
+        launchDate: "2025-06-01T18:00:00Z"
       },
       // Add more tokens similarly...
     ];
@@ -412,11 +419,19 @@
 
         const countdownCell = document.getElementById("countdown-" + index);
         if (!countdownCell) return;
-
+        
         if (diff <= 0) {
-          countdownCell.innerHTML = `<em>Launched</em>`;
-          return;
-        }
+         if (token.mint && token.mint !== "null") {
+    const shortMint = truncateMint(token.mint);
+    countdownCell.innerHTML = `
+    <a href="https://solscan.io/token/${token.mint}" target="_blank">
+      ${shortMint}
+        </a>`;
+  } else {
+    countdownCell.innerHTML = `<em>Launched, CA in Telegram + Discord!</em>`;
+  }
+         return;
+       }
 
         // Calculate days, hours, minutes, seconds
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
