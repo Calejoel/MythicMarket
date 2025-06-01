@@ -78,13 +78,19 @@
     details {
       margin-bottom: 1.5rem;
     }
-    summary.section-title {
-      font-size: 1.5rem;
-      padding: 0.75rem 1rem;
-      background: var(--header-gradient);
-      color: var(--header-text);
-      border-radius: 8px;
-      cursor: pointer;
+   summary.section-title {
+  font-size: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--header-gradient);
+  color: var(--header-text);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+   }
+    summary.section-title:hover,
+    summary.section-title:focus {
+      background-color: #005fa3;
+      outline: none;
     }
     .section-content {
       padding: 1rem;
@@ -111,6 +117,39 @@
     details[open] summary::before {
       transform: rotate(90deg);
     }
+    summary:hover,
+    summary:focus {
+      color: #004080;
+      outline: none;
+    }
+    /* Specific style for nested 'How to Vote' summary */
+details details > summary {
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1rem;
+  padding-left: 0.25rem;
+  transition: color 0.3s ease;
+}
+
+details details > summary:hover,
+details details > summary:focus {
+  color: #004080;
+}
+    /* View Live Results button hover */
+.view-results-button {
+  background: #004080;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+.view-results-button:hover,
+.view-results-button:focus {
+  background-color: #0066cc;
+  outline: none;
+}
     .countdown-table {
       width: 100%;
       border-collapse: collapse;
@@ -207,14 +246,16 @@
       </div>
     </details>
     
-   <details open>
+ <details open>
   <summary class="section-title">Vote for the Next God</summary>
   <div class="section-content">
-    <p>Select from a community-curated list of mythic gods. One of top voted gods will be the next micro meme coin collectible launched on Mythic Market! You get 10 votes every week</p>
+    <p>
+      Select from a community-curated list of mythic gods. One of top voted gods will be the next micro meme coin collectible launched on Mythic Market! You get 10 votes every week.
+    </p>
 
     <!-- Instructions with collapsible help -->
     <details>
-      <summary style="margin-top: 1rem; cursor: pointer; font-weight: bold;">How to Vote</summary>
+      <summary>How to Vote</summary>
       <div style="padding: 0.5rem 1rem;">
         <ul>
           <li>Scroll the embedded list below.</li>
@@ -234,14 +275,13 @@
     <!-- Results Button with hover effect -->
     <div style="text-align: center; margin-top: 1rem;">
       <a href="https://strawpoll.com/GeZARamWbyV/results" target="_blank" 
-         style="background: #004080; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; transition: background 0.3s ease;"
-         onmouseover="this.style.background='#0066cc'" 
-         onmouseout="this.style.background='#004080'">
+         class="view-results-button">
         View Live Results
       </a>
     </div>
   </div>
 </details>
+
 
 
   </main>
