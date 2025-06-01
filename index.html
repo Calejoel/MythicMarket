@@ -99,6 +99,8 @@
       cursor: pointer;
       transition: background-color 0.3s ease, color 0.3s ease;
       outline: none; /* remove default focus outline */
+      display: flex;
+      align-items: center;
     }
     summary.section-title:hover,
     summary.section-title:focus {
@@ -127,11 +129,11 @@
       content: "▶";
       display: inline-block;
       margin-right: 0.5em;
-      transform: rotate(0deg);
+      transform: rotate(0deg); /* Start pointing right */
       transition: transform 0.2s ease-in-out;
     }
     details[open] summary::before {
-      transform: rotate(90deg);
+      transform: rotate(90deg); /* Rotate to point down when open */
     }
     summary:hover,
     summary:focus {
@@ -260,21 +262,21 @@
             <tr>
               <th>Token</th>
               <th>Launch Date (UTC)</th>
-              <th>Countdown / Link</th>
+              <th>Countdown</th>
             </tr>
           </thead>
-          <tbody id="token-data">
-            <!-- JS will insert rows here -->
-          </tbody>
+          <tbody id="token-data"></tbody>
         </table>
       </div>
     </details>
-    
+
+    <!-- Live Results Section -->
     <details open>
-      <summary class="section-title">Vote for the Next God</summary>
+      <summary class="section-title">Vote for Upcoming Token</summary>
       <div class="section-content">
         <p>
-          Select from a community-curated list of mythic gods. One of top voted gods will be the next micro meme coin collectible launched on Mythic Market.<br><br>
+          The community votes for the next token release.<br><br>
+          <iframe src="https://voting.url" class="voting-embed" frameborder="0"></iframe><br><br>
           <a href="https://voting.url" class="view-results-button">View Live Results</a>
         </p>
       </div>
