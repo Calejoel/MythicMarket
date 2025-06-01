@@ -146,17 +146,15 @@
       width: 28px;
       height: 28px;
     }
-     .community-links ul {
-      list-style: disc;
-      padding-left: 1.2rem;
-      margin-top: 0.75rem;
-    }
-
-    .voting-embed {
-      width: 100%;
-      height: 500px;
-      border: none;
-    }
+    .community-links ul {
+    list-style: disc;
+    padding-left: 1.5rem; /* Increased padding */
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+  }
+    .community-links li {
+    margin-bottom: 0.5rem; /* Optional: add space between items */
+  }
   </style>
 </head>
 <body>
@@ -202,18 +200,23 @@
     </details>
 
     <!-- Community & Voting Section (example) -->
-    <details open>
-      <summary class="section-title">Join the Community & Vote</summary>
-      <div class="section-content">
-        <p>Connect with Mythic Market holders and vote for the next god‐themed coin:</p>
-        <ul class="community-links">
-          <li><a href="https://t.me/MythicalMarket" target="_blank">Telegram</a></li>
-          <li><a href="https://x.com/Mythic_Market" target="_blank">Twitter (X)</a></li>
-          <li><a href="https://discord.gg/g5wBE95Zpc" target="_blank">Discord</a></li>
-        </ul>
-        <iframe src="https://strawpoll.com/embed/GeZARamWbyV" class="voting-embed" allowfullscreen></iframe>
-      </div>
-    </details>
+<details open>
+  <summary class="section-title">Join the Community & Vote</summary>
+  <div class="section-content">
+    <p>Connect with Mythic Market holders and vote for the next god‐themed coin:</p>
+    <div class="community-links">
+      <ul>
+        <li><a href="https://t.me/MythicalMarket" target="_blank">Telegram</a></li>
+        <li><a href="https://x.com/Mythic_Market" target="_blank">Twitter (X)</a></li>
+        <li><a href="https://discord.gg/g5wBE95Zpc" target="_blank">Discord</a></li>
+      </ul>
+    </div>
+
+    <!-- Embed both voting interface and results -->
+    <iframe src="https://strawpoll.com/embed/GeZARamWbyV" class="voting-embed" allowfullscreen></iframe>
+    <iframe src="https://strawpoll.com/embed/results/GeZARamWbyV" class="voting-embed" allowfullscreen style="margin-top: 1rem;"></iframe>
+  </div>
+</details>
   </main>
 
   <footer>
@@ -255,7 +258,7 @@
         name: "ARES",
         symbol: "ARES",
         image: "assets/ARES.png",
-        mint: "HJ8Z8qkLXKS8HLCQEFquTXierjZKLnnkBAn4nTaDBZy1",
+        mint: "null",
         // Launch date in ISO 8601 (UTC):
         launchDate: "2025-06-06T19:00:00Z"
       },
@@ -263,15 +266,15 @@
         name: "ZEUS",
         symbol: "ZEUS",
         image: "assets/ZEUS.png",
-        mint: "Ft9xosgWQZg8YpHfB8a5T7kWQZmoMvuz8xjPNg9GkH2J",
-        launchDate: "2025-06-10T15:00:00Z"
+        mint: "null",
+        launchDate: "2025-06-13T19:00:00Z"
       },
       {
         name: "THOR",
         symbol: "THOR",
         image: "assets/THOR.png",
-        mint: "D3b9sRkAbXyLk3QWz7CeW8nXjZ4yYv7QMjKqG9tH7E",
-        launchDate: "2025-06-15T12:00:00Z"
+        mint: "null",
+        launchDate: "2025-06-20T19:00:00Z"
       },
       // Add more tokens similarly...
     ];
