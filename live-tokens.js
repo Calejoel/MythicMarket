@@ -6,22 +6,22 @@ const tokenData = [
     name: "ARES",
     symbol: "ARES",
     image: "assets/ARES.png",            // Path to token icon
-    mint: "YOUR_MINT_ADDRESS_1",         // Replace with ARES mint address
-    launchPrice: 0.05,                   // USD launch price per token
+    mint: "HJ8Z8qkLXKS8HLCQEFquTXierjZKLnnkBAn4nTaDBZy1",         // Replace with ARES mint address
+    launchPrice: 0.5,                   // USD launch price per token
   },
   {
     name: "ZEUS",
     symbol: "ZEUS",
     image: "assets/ZEUS.png",            // Path to token icon
     mint: "YOUR_MINT_ADDRESS_2",         // Replace with ZEUS mint address
-    launchPrice: 0.08,                   // USD launch price
+    launchPrice: 0.5,                   // USD launch price
   },
   {
     name: "THOR",
     symbol: "THOR",
     image: "assets/THOR.png",            // Path to token icon
     mint: "YOUR_MINT_ADDRESS_3",         // Replace with THOR mint address
-    launchPrice: 0.06,                   // USD launch price
+    launchPrice: 0.5,                   // USD launch price
   },
   // Add more tokens here as needed...
 ];
