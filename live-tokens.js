@@ -13,7 +13,7 @@ const tokenData = [
     name: "ZEUS",
     symbol: "ZEUS",
     image: "assets/ZEUS.png",
-    mint: "YOUR_MINT_ADDRESS_2",
+    mint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
     launchPrice: 0.5,
   },
   {
@@ -73,11 +73,11 @@ async function renderTokenTable() {
     console.log(`Holders for ${token.symbol}:`, holders, `Liquidity:`, liquidity);
 
     // If price is zero or missing, show a friendly pre-launch row
-    if (currentPrice === 0) {
+    /* if (currentPrice === 0) {
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>
-          <img src="${token.image}" alt="${token.symbol}" />
+       <td>
+         <img src="${token.image}" alt="${token.symbol}" />
           <strong>${token.name}</strong> (${token.symbol})
         </td>
         <td colspan="6" style="text-align:center; font-style: italic; color: #777;">
@@ -86,7 +86,9 @@ async function renderTokenTable() {
       `;
       tbody.appendChild(row);
       continue;
-    }
+    } */
+    if (currentPrice === 0) continue;
+
 
     // Calculate values
     const supply = 5000; // fixed supply per token
