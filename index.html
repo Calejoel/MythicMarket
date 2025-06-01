@@ -315,7 +315,7 @@
 
 
     <!-- Countdown Table Section -->
-    <details open>
+    <details id="upcoming-section" open>
       <summary class="section-title">Upcoming Token Launches</summary>
       <div class="section-content overflow-hidden rounded-t-2xl">
         <p>Subject to change. VOTE NOW, YOU DECIDE THE FATES!</p>
@@ -335,7 +335,7 @@
     </details>
 
     
-    <details open>
+    <details id="vote-section" open>
       <summary class="section-title">Vote for the Next God</summary>
       <div class="section-content">
         <p>
@@ -528,11 +528,14 @@
     });
   </script>
   <script>
-  // For every <details> element
-  document.querySelectorAll("details").forEach((details) => {
-    const id = details.id;
+  // List only the IDs of the details you want to track
+  const detailsToRemember = ["about-section", "manifesto-section"];
 
-    // Load state from localStorage
+  detailsToRemember.forEach((id) => {
+    const details = document.getElementById(id);
+    if (!details) return;
+
+    // Load saved state if any
     const isOpen = localStorage.getItem(`details-${id}`);
     if (isOpen === "true") {
       details.open = true;
