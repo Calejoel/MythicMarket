@@ -7,220 +7,212 @@
   <link rel="icon" href="assets/favicon.ico" />
 
   <style>
-  :root {
-    --bg-gradient: linear-gradient(135deg, #00e0ff, #006eff);
-    --section-gradient: linear-gradient(135deg, #d0f4ff, #a0d9ff);
-    --header-gradient: linear-gradient(135deg, #004080, #001f3f);
-    --text-color: #000;
-    --section-bg: #f0f8ff;
-    --header-text: #fff;
-  }
+    :root {
+      --bg-gradient: linear-gradient(135deg, #00e0ff, #006eff);
+      --section-gradient: linear-gradient(135deg, #d0f4ff, #a0d9ff);
+      --header-gradient: linear-gradient(135deg, #004080, #001f3f);
+      --text-color: #000;
+      --section-bg: #f0f8ff;
+      --header-text: #fff;
+    }
 
-  [data-theme="dark"] {
-    --bg-gradient: linear-gradient(135deg, #001f3f, #004080);
-    --section-gradient: linear-gradient(135deg, #003366, #002244);
-    --header-gradient: linear-gradient(135deg, #000c1a, #001f3f);
-    --text-color: #fff;
-    --section-bg: #0c1b2a;
-    --header-text: #fff;
-  }
+    [data-theme="dark"] {
+      --bg-gradient: linear-gradient(135deg, #001f3f, #004080);
+      --section-gradient: linear-gradient(135deg, #003366, #002244);
+      --header-gradient: linear-gradient(135deg, #000c1a, #001f3f);
+      --text-color: #fff;
+      --section-bg: #0c1b2a;
+      --header-text: #fff;
+    }
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  body {
-    background: var(--bg-gradient);
-    color: var(--text-color);
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-  }
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
 
-  a {
-    color: #00c2ff;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
+    a {
+      color: #00c2ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
 
-  header {
-    position: relative;
-    background: #000;
-    color: var(--header-text);
-    text-align: center;
-    padding: 2rem 1rem;
-  }
+    header {
+      position: relative;
+      background: #000;
+      color: var(--header-text);
+      text-align: center;
+      padding: 2rem 1rem;
+    }
 
-  #theme-toggle {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: #333;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+    #theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #333;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-  header img {
-    max-width: 220px;
-    margin-bottom: 0.5rem;
-  }
+    header img {
+      max-width: 220px;
+      margin-bottom: 0.5rem;
+    }
 
-  header h1 {
-    color: #fff;
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
+    header h1 {
+      color: #fff;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
 
-  header p {
-    opacity: 0.8;
-    font-size: 1rem;
-  }
+    header p {
+      opacity: 0.8;
+      font-size: 1rem;
+    }
 
-  #countdown {
-    font-size: 1.5rem;
-    color: #ffcc00;
-    margin-top: 1rem;
-  }
+    #countdown {
+      font-size: 1.5rem;
+      color: #ffcc00;
+      margin-top: 1rem;
+    }
 
-  main {
-    max-width: 800px;
-    margin: 1.5rem auto;
-    padding: 0 1rem;
-  }
+    main {
+      max-width: 800px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+    }
 
-  details {
-    margin-bottom: 1.5rem;
-  }
+    details {
+      margin-bottom: 1.5rem;
+    }
 
-  summary.section-title {
-    font-size: 1.5rem;
-    padding: 0.75rem 1rem;
-    background: var(--header-gradient);
-    color: var(--header-text);
-    border-radius: 8px;
-    cursor: pointer;
-  }
+    summary.section-title {
+      font-size: 1.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--header-gradient);
+      color: var(--header-text);
+      border-radius: 8px;
+      cursor: pointer;
+    }
 
-  .section-content {
-    padding: 1rem;
-    background: var(--section-gradient);
-    border-radius: 8px;
-    margin-top: 0.5rem;
-  }
+    .section-content {
+      padding: 1rem;
+      background: var(--section-gradient);
+      border-radius: 8px;
+      margin-top: 0.5rem;
+    }
 
-  /* 🔥 Final cross-browser fix: hide native disclosure markers */
-  summary {
-    list-style: none;
-  }
+    /* 🔥 Hide native disclosure markers */
+    summary {
+      list-style: none;
+    }
+    summary::marker,
+    summary::-webkit-details-marker {
+      display: none;
+      font-size: 0;
+      color: transparent;
+    }
 
-  summary::marker,
-  summary::-webkit-details-marker {
-    display: none;
-    font-size: 0;
-    color: transparent;
-  }
+    summary::before {
+      content: "▶";
+      display: inline-block;
+      margin-right: 0.5em;
+      transform: rotate(0deg);
+      transition: transform 0.2s ease-in-out;
+    }
+    details[open] summary::before {
+      transform: rotate(90deg);
+    }
 
-  /* Custom arrow */
-  summary::before {
-    content: "▶";
-    display: inline-block;
-    margin-right: 0.5em;
-    transform: rotate(0deg);
-    transition: transform 0.2s ease-in-out;
-  }
+    ul {
+      padding-left: 1.2rem;
+    }
 
-  details[open] summary::before {
-    transform: rotate(90deg);
-  }
+    .coins-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
 
-  ul {
-    padding-left: 1.2rem;
-  }
+    .coins-table th, .coins-table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+    }
 
-  .coins-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-  }
+    .coins-table th {
+      background: #005fa3;
+      color: white;
+    }
 
-  .coins-table th, .coins-table td {
-    padding: 0.75rem;
-    border-bottom: 1px solid #ccc;
-  }
+    .coins-table img {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
 
-  .coins-table th {
-    background: #005fa3;
-    color: white;
-  }
+    .btn-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #1e1e1e;
+      color: #fff;
+      border-radius: 5px;
+    }
 
-  .coins-table img {
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
-    margin-right: 0.5rem;
-  }
+    .community-section {
+      padding: 1.5rem;
+      background: var(--section-gradient);
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
 
-  .btn-link {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background: #1e1e1e;
-    color: #fff;
-    border-radius: 5px;
-  }
+    .community-links ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1rem;
+    }
 
-  .community-section {
-    padding: 1.5rem;
-    background: var(--section-gradient);
-    border-radius: 8px;
-    margin: 1rem 0;
-  }
+    .community-links li {
+      margin-bottom: 0.5rem;
+    }
 
-  .community-section h2 {
-    font-size: 1.5rem;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-  }
+    .voting-embed {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
 
-  .community-links ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 1rem;
-  }
+    footer {
+      text-align: center;
+      margin: 2rem 0;
+      color: var(--text-color);
+      font-size: 0.9rem;
+    }
 
-  .community-links li {
-    margin-bottom: 0.5rem;
-  }
+    .social-icons a {
+      margin: 0 0.5rem;
+      display: inline-block;
+    }
 
-  .voting-embed {
-    width: 100%;
-    height: 500px;
-    border: none;
-  }
-
-  footer {
-    text-align: center;
-    margin: 2rem 0;
-    color: var(--text-color);
-    font-size: 0.9rem;
-  }
-
-  .social-icons a {
-    margin: 0 0.5rem;
-    display: inline-block;
-  }
-
-  .social-icons img {
-    width: 28px;
-    height: 28px;
-  }
-</style>
+    .social-icons img {
+      width: 28px;
+      height: 28px;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -232,6 +224,7 @@
   </header>
 
   <main>
+    <!-- About Section -->
     <details open>
       <summary class="section-title">About Mythic Market</summary>
       <div class="section-content">
@@ -245,6 +238,7 @@
       </div>
     </details>
 
+    <!-- Token Details Section -->
     <details open>
       <summary class="section-title">Token Details (Next Launch)</summary>
       <div class="section-content">
@@ -261,6 +255,7 @@
       </div>
     </details>
 
+    <!-- Launched Coins Section -->
     <details open>
       <summary class="section-title">Launched Coins</summary>
       <div class="section-content">
@@ -278,12 +273,13 @@
             </tr>
           </thead>
           <tbody id="token-data">
-            <!-- Token rows will be dynamically inserted by JS below -->
+            <!-- Rows will be inserted here by JS -->
           </tbody>
         </table>
       </div>
     </details>
 
+    <!-- Community & Voting Section -->
     <details open>
       <summary class="section-title">Join the Community & Vote</summary>
       <div class="section-content community-section">
@@ -309,6 +305,9 @@
     </div>
   </footer>
 
+  <!-- ========================= -->
+  <!-- COUNTDOWN & DARK MODE JS -->
+  <!-- ========================= -->
   <script>
     const countdownTarget = new Date("2025-06-06T19:00:00Z").getTime();
     const countdown = document.getElementById("countdown");
@@ -349,6 +348,139 @@
     });
   </script>
 
-  <script src="live-tokens.js"></script>
+  <!-- ========================= -->
+  <!-- LIVE TOKENS SCRIPT -->
+  <!-- ========================= -->
+  <script>
+    // =========================
+    // CONFIGURATION SECTION
+    // =========================
+    const tokenData = [
+      {
+        name: "ARES",
+        symbol: "ARES",
+        image: "assets/ARES.png",
+        jupiterId: "SOL", 
+        mint: "So11111111111111111111111111111111111111112",
+        launchPrice: 0.5,
+      },
+      {
+        name: "USDC",
+        symbol: "USDC",
+        image: "assets/USDC.png",
+        jupiterId: "USDC",
+        mint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+        launchPrice: 1.0,
+      },
+      {
+        name: "RAY",
+        symbol: "RAY",
+        image: "assets/RAY.png",
+        jupiterId: "RAY",
+        mint: "4k3Dyjzvzp8e6N2XfCFV5jv3s5ZD5N6t2nT2sW1LL1aM",
+        launchPrice: 2.0,
+      },
+      // Add your own coin here once it’s live on Jupiter…
+    ];
+
+    // =========================
+    // HELPER: Fetch price via Jupiter (using jupiterId)
+    // =========================
+    async function fetchPrice(jupiterId) {
+      try {
+        const res = await fetch(`https://quote-api.jup.ag/v6/price?ids=${jupiterId}`);
+        if (!res.ok) {
+          console.warn(`Jupiter price fetch failed for ${jupiterId}: ${res.status}`);
+          return 0;
+        }
+        const json = await res.json();
+        const price = json.data[jupiterId]?.price || 0;
+        return price;
+      } catch (err) {
+        console.error(`Error fetching Jupiter price for ${jupiterId}:`, err);
+        return 0;
+      }
+    }
+
+    // =========================
+    // HELPER: Fetch holders & liquidity via Solscan (using mint)
+    // =========================
+    async function fetchSolscanData(mintAddress) {
+      try {
+        const res = await fetch(`https://public-api.solscan.io/token/meta?tokenAddress=${mintAddress}`);
+        if (!res.ok) {
+          console.warn(`Solscan fetch failed for ${mintAddress}: ${res.status}`);
+          return { holders: 0, liquidity: 0 };
+        }
+        const json = await res.json();
+        const holders = json.holderCount || 0;
+        const liquidity = json.liquidity || 0;
+        return { holders, liquidity };
+      } catch (err) {
+        console.error(`Error fetching Solscan data for ${mintAddress}:`, err);
+        return { holders: 0, liquidity: 0 };
+      }
+    }
+
+    // =========================
+    // RENDER FUNCTION: Populate the table with live data (placeholders if missing)
+    // =========================
+    async function renderTokenTable() {
+      const tbody = document.getElementById("token-data");
+      tbody.innerHTML = ""; // Clear existing rows
+
+      for (const token of tokenData) {
+        console.log(`Fetching data for: ${token.symbol}`);
+
+        // 1) Price (Jupiter)
+        const currentPrice = await fetchPrice(token.jupiterId);
+        console.log(`Price for ${token.symbol}:`, currentPrice);
+
+        // 2) Holders & Liquidity (Solscan)
+        const { holders, liquidity } = await fetchSolscanData(token.mint);
+        console.log(`Holders for ${token.symbol}:`, holders, `Liquidity:`, liquidity);
+
+        // 3) Prepare display values (using “N/A” where needed)
+        const displayPrice = currentPrice > 0
+          ? `$${currentPrice.toFixed(4)}`
+          : "N/A";
+
+        const supply = 5000;
+        const marketCap = currentPrice > 0
+          ? `$${(currentPrice * supply).toFixed(2)}`
+          : "N/A";
+
+        const displayHolders = holders > 0 ? holders : "N/A";
+        const displayLiquidity = liquidity > 0 ? `$${liquidity.toFixed(2)}` : "N/A";
+
+        const lifetimeGain = currentPrice > 0 && token.launchPrice
+          ? `${(((currentPrice - token.launchPrice) / token.launchPrice) * 100).toFixed(1)}%`
+          : "N/A";
+
+        const truncated = `${token.mint.slice(0, 4)}...${token.mint.slice(-4)}`;
+        const explorerURL = `https://solscan.io/token/${token.mint}`;
+
+        // 4) Build the row (always include it)
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>
+            <img src="${token.image}" alt="${token.symbol}" width="24" height="24" />
+            <strong>${token.name}</strong> (${token.symbol})
+          </td>
+          <td>${marketCap}</td>
+          <td>${displayPrice}</td>
+          <td>${displayHolders}</td>
+          <td>${displayLiquidity}</td>
+          <td>${lifetimeGain}</td>
+          <td><a href="${explorerURL}" target="_blank">${truncated}</a></td>
+        `;
+        tbody.appendChild(row);
+      }
+    }
+
+    // Initialize on page load
+    document.addEventListener("DOMContentLoaded", renderTokenTable);
+    setInterval(renderTokenTable, 60000); // Refresh every minute
+  </script>
 </body>
 </html>
