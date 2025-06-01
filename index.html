@@ -85,15 +85,18 @@
       color: var(--header-text);
       border-radius: 8px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
-    .section-content {
-      padding: 1rem;
-      background: var(--section-gradient);
-      border-radius: 8px;
-      margin-top: 0.5rem;
+    summary.section-title:hover,
+    summary.section-title:focus {
+      background-color: #005fa3;
+      outline: none;
     }
     summary {
       list-style: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: color 0.3s ease;
     }
     summary::marker,
     summary::-webkit-details-marker {
@@ -110,6 +113,22 @@
     }
     details[open] summary::before {
       transform: rotate(90deg);
+    }
+    summary:hover,
+    summary:focus {
+      color: #004080;
+      outline: none;
+    }
+    details details > summary {
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 1rem;
+      padding-left: 0.25rem;
+      transition: color 0.3s ease;
+    }
+    details details > summary:hover,
+    details details > summary:focus {
+      color: #004080;
     }
     .countdown-table {
       width: 100%;
@@ -147,22 +166,37 @@
       height: 28px;
     }
     .community-links ul {
-    list-style: disc;
-    padding-left: 1.5rem; /* Increased padding */
-    margin-top: 0.75rem;
-    margin-bottom: 0;
-  }
+      list-style: disc;
+      padding-left: 1.5rem;
+      margin-top: 0.75rem;
+      margin-bottom: 0;
+    }
     .community-links li {
-    margin-bottom: 0.5rem; /* Optional: add space between items */
-  }
+      margin-bottom: 0.5rem;
+    }
     .voting-embed {
-    width: 100%;
-    height: 480px;
-    border: none;
-    border-radius: 8px;
-    max-width: 100%;
-    display: block;
-  }
+      width: 100%;
+      height: 480px;
+      border: none;
+      border-radius: 8px;
+      max-width: 100%;
+      display: block;
+    }
+    /* Button hover */
+    .view-results-button {
+      background: #004080;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+    .view-results-button:hover,
+    .view-results-button:focus {
+      background-color: #0066cc;
+      outline: none;
+    }
   </style>
 </head>
 <body>
@@ -170,11 +204,11 @@
     <button id="theme-toggle">Toggle Dark Mode</button>
     <img src="assets/MythicMarketLogo.png" alt="Mythic Market Logo" />
     <h1>Mythic Market</h1>
-    <p>Launching Low‐Supply Micro Meme Coin Collectibles based on Mythical Gods — Voted by YOU</p>
+    <p>Launching Low‐Supply Micro Meme Coins based on Mythical Gods — Voted by YOU</p>
   </header>
 
   <main>
-    <!-- About Section (example) -->
+    <!-- About Section -->
     <details open>
       <summary class="section-title">About Mythic Market</summary>
       <div class="section-content">
@@ -207,181 +241,27 @@
       </div>
     </details>
     
-   <details open>
-  <summary class="section-title">Vote for the Next God</summary>
-  <div class="section-content">
-    <p>Select from a community-curated list of mythic gods. The top vote-getter will be the next meme coin launched on Mythic Market.</p>
+    <!-- Voting Section -->
+    <details open>
+      <summary class="section-title">Vote for the Next God</summary>
+      <div class="section-content">
+        <p>
+          Select from a community-curated list of mythic gods. One of top voted gods will be the next micro meme coin collectible launched on Mythic Market! You get 10 votes every week.
+        </p>
 
-    <!-- Instructions with collapsible help -->
-    <details>
-      <summary style="margin-top: 1rem; cursor: pointer; font-weight: bold;">How to Vote</summary>
-      <div style="padding: 0.5rem 1rem;">
-        <ul>
-          <li>Scroll the embedded list below.</li>
-          <li>Select one or more gods you want to see launched.</li>
-          <li>Click <strong>Vote</strong> to submit your picks.</li>
-        </ul>
-      </div>
-    </details>
+        <!-- Instructions with collapsible help -->
+        <details>
+          <summary>How to Vote</summary>
+          <div style="padding: 0.5rem 1rem;">
+            <ul>
+              <li>Scroll the embedded list below.</li>
+              <li>Select up to 10 gods you want to see launched next.</li>
+              <li>Click <strong>Vote</strong> to submit your picks.</li>
+            </ul>
+          </div>
+        </details>
 
-    <!-- Scrollable embed container with fixed inner height -->
-    <div style="height: 600px; overflow: hidden; border: 2px solid #ccc; border-radius: 8px; margin-top: 1rem;">
-      <iframe src="https://strawpoll.com/embed/GeZARamWbyV" 
-              style="width: 100%; height: 100%; border: none; display: block; border-radius: 8px; overflow-y: auto;">
-      </iframe>
-    </div>
-
-    <!-- Results Button with hover effect -->
-    <div style="text-align: center; margin-top: 1rem;">
-      <a href="https://strawpoll.com/GeZARamWbyV/results" target="_blank" 
-         style="background: #004080; color: white; padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; transition: background 0.3s ease;"
-         onmouseover="this.style.background='#0066cc'" 
-         onmouseout="this.style.background='#004080'">
-        View Live Results
-      </a>
-    </div>
-  </div>
-</details>
-
-
-  </main>
-
-  <footer>
-    <p>© 2025 Mythic Market. Not financial advice. DYOR.</p>
-    <div class="social-icons">
-      <a href="https://x.com/Mythic_Market" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
-      <a href="https://t.me/MythicalMarket" target="_blank"><img src="assets/telegram-icon.png" alt="Telegram" /></a>
-      <a href="https://discord.gg/g5wBE95Zpc" target="_blank"><img src="assets/discord-icon.png" alt="Discord" /></a>
-    </div>
-  </footer>
-
-  <!-- ========================= -->
-  <!-- DARK MODE TOGGLE SCRIPT -->
-  <!-- ========================= -->
-  <script>
-    const root = document.documentElement;
-    const themeToggle = document.getElementById('theme-toggle');
-    const saved = localStorage.getItem('theme');
-    if (saved) {
-      root.setAttribute('data-theme', saved);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      root.setAttribute('data-theme', 'dark');
-    }
-    themeToggle.addEventListener('click', () => {
-      const current = root.getAttribute('data-theme');
-      const next = (current === 'dark' ? 'light' : 'dark');
-      root.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-    });
-  </script>
-
-  <!-- ========================= -->
-  <!-- COUNTDOWN + TABLE SCRIPT -->
-  <!-- ========================= -->
-  <script>
-    // 1) CONFIGURE YOUR TOKENS HERE
-    const tokenData = [
-      {
-        name: "ARES",
-        symbol: "ARES",
-        image: "assets/ARES.png",
-        mint: "null",
-        // Launch date in ISO 8601 (UTC):
-        launchDate: "2025-06-06T19:00:00Z"
-      },
-      {
-        name: "ZEUS",
-        symbol: "ZEUS",
-        image: "assets/ZEUS.png",
-        mint: "null",
-        launchDate: "2025-06-13T19:00:00Z"
-      },
-      {
-        name: "THOR",
-        symbol: "THOR",
-        image: "assets/THOR.png",
-        mint: "null",
-        launchDate: "2025-06-20T19:00:00Z"
-      },
-      // Add more tokens similarly...
-    ];
-
-    // 2) UTILITY: Format a mint address as "xxxx...xxxx"
-    function truncateMint(mint) {
-      return mint.slice(0, 4) + "..." + mint.slice(-4);
-    }
-
-    // 3) Build table rows and start countdowns
-    function renderTokenRows() {
-      const tbody = document.getElementById("token-data");
-      tbody.innerHTML = ""; // clear existing rows
-
-      tokenData.forEach((token, index) => {
-        // Create row and cells
-        const row = document.createElement("tr");
-
-        // Token cell: image + name (symbol)
-        const tokenCell = document.createElement("td");
-        tokenCell.innerHTML = `
-          <img src="${token.image}" alt="${token.symbol}" width="24" height="24" />
-          <strong>${token.name}</strong> (${token.symbol})
-        `;
-        row.appendChild(tokenCell);
-
-        // Launch date (static text)
-        const launchCell = document.createElement("td");
-        // Show human‐readable date/time
-        const launchDateObj = new Date(token.launchDate);
-        launchCell.innerText = launchDateObj.toUTCString().replace(" GMT", "");
-        row.appendChild(launchCell);
-
-        // Countdown cell: will update every second
-        const countdownCell = document.createElement("td");
-        countdownCell.id = `countdown-${index}`;
-        row.appendChild(countdownCell);
-
-        // Append row to table body
-        tbody.appendChild(row);
-
-        // Kick off countdown for this token
-        startCountdown(token.launchDate, token.mint, countdownCell.id);
-      });
-    }
-
-    // 4) Start a countdown on a given cell (by element ID)
-    function startCountdown(isoLaunchDate, mint, elementId) {
-      const targetTime = new Date(isoLaunchDate).getTime();
-      const cell = document.getElementById(elementId);
-
-      function update() {
-        const now = Date.now();
-        const diff = targetTime - now;
-
-        if (diff <= 0) {
-          // Launch time reached or passed → replace cell with Solscan link
-          const truncated = truncateMint(mint);
-          cell.innerHTML = `<a href="https://solscan.io/token/${mint}" target="_blank">${truncated}</a>`;
-          clearInterval(intervalId);
-          return;
-        }
-
-        // Calculate days, hours, minutes, seconds
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        // Display "Xd Xh Xm Xs"
-        cell.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-      }
-
-      // Initial call & then update every second
-      update();
-      const intervalId = setInterval(update, 1000);
-    }
-
-    // 5) When page loads, render the rows
-    document.addEventListener("DOMContentLoaded", renderTokenRows);
-  </script>
-</body>
-</html>
+        <!-- Scrollable embed container -->
+        <div style="height: 600px; overflow: hidden; border: 2px solid #ccc; border-radius: 8px; margin-top: 1rem;">
+          <iframe src="https://strawpoll.com/embed/GeZARamWbyV" 
+                  style="width: 100%; height:
