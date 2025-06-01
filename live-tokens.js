@@ -6,46 +6,55 @@ const tokenData = [
     name: "ARES",
     symbol: "ARES",
     image: "assets/ARES.png",
-    mint: "So11111111111111111111111111111111111111112",
+    jupiterId: "SOL", // Jupiter expects token symbol or ID (e.g., "SOL")
+    mint: "So11111111111111111111111111111111111111112", // SOL native token mint
     launchPrice: 0.5,
   },
   {
-    name: "ZEUS",
-    symbol: "ZEUS",
-    image: "assets/ZEUS.png",
-    mint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-    launchPrice: 0.5,
+    name: "USDC",
+    symbol: "USDC",
+    image: "assets/USDC.png",
+    jupiterId: "USDC", // Jupiter token symbol
+    mint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v", // USDC mint on Solana
+    launchPrice: 1.0,
   },
   {
-    name: "THOR",
-    symbol: "THOR",
-    image: "assets/THOR.png",
-    mint: "YOUR_MINT_ADDRESS_3",
-    launchPrice: 0.5,
+    name: "RAY",
+    symbol: "RAY",
+    image: "assets/RAY.png",
+    jupiterId: "RAY", // Jupiter token symbol for Raydium
+    mint: "4k3Dyjzvzp8e6N2XfCFV5jv3s5ZD5N6t2nT2sW1LL1aM", // RAY mint
+    launchPrice: 2.0,
   },
+  // Add more tokens here as needed...
 ];
 
 // =========================
-// HELPER: Fetch current price from Jupiter API
+// HELPER: Fetch current price via Jupiter API using jupiterId
 // =========================
-async function fetchPrice(mintAddress) {
+async function fetchPrice(jupiterId) {
   try {
-    const res = await fetch(`https://quote-api.jup.ag/v6/price?ids=${mintAddress}`);
+    const res = await fetch(`https://quote-api.jup.ag/v6/price?ids=${jupiterId}`);
+    if (!res.ok) throw new Error(`Status code: ${res.status}`);
     const json = await res.json();
-    const price = json.data[mintAddress]?.price || 0;
+    // Jupiter returns an object keyed by jupiterId
+    const price = json.data[jupiterId]?.price || 0;
     return price;
   } catch (err) {
-    console.error(`Error fetching Jupiter price for ${mintAddress}:`, err);
+    console.error(`Error fetching Jupiter price for ${jupiterId}:`, err);
     return 0;
   }
 }
 
 // =========================
-// HELPER: Fetch holders & liquidity from Solscan API
+// HELPER: Fetch holders & liquidity via Solscan API using mint
 // =========================
 async function fetchSolscanData(mintAddress) {
   try {
-    const res = await fetch(`https://public-api.solscan.io/token/meta?tokenAddress=${mintAddress}`);
+    const res = await fetch(
+      `https://public-api.solscan.io/token/meta?tokenAddress=${mintAddress}`
+    );
+    if (!res.ok) throw new Error(`Status code: ${res.status}`);
     const json = await res.json();
     const holders = json.holderCount || 0;
     const liquidity = json.liquidity || 0;
@@ -57,7 +66,7 @@ async function fetchSolscanData(mintAddress) {
 }
 
 // =========================
-// RENDER FUNCTION: Populate the table
+// RENDER FUNCTION: Populate the table with live data only
 // =========================
 async function renderTokenTable() {
   const tbody = document.getElementById("token-data");
@@ -66,35 +75,27 @@ async function renderTokenTable() {
   for (const token of tokenData) {
     console.log(`Fetching data for: ${token.symbol}`);
 
-    const currentPrice = await fetchPrice(token.mint);
+    // 1) Fetch live price using jupiterId
+    const currentPrice = await fetchPrice(token.jupiterId);
     console.log(`Price for ${token.symbol}:`, currentPrice);
 
+    // 2) Fetch holders & liquidity using mint
     const { holders, liquidity } = await fetchSolscanData(token.mint);
-    console.log(`Holders for ${token.symbol}:`, holders, `Liquidity:`, liquidity);
+    console.log(
+      `Holders for ${token.symbol}:`,
+      holders,
+      `Liquidity:`,
+      liquidity
+    );
 
-    // If price is zero or missing, show a friendly pre-launch row
-    /* if (currentPrice === 0) {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-       <td>
-         <img src="${token.image}" alt="${token.symbol}" />
-          <strong>${token.name}</strong> (${token.symbol})
-        </td>
-        <td colspan="6" style="text-align:center; font-style: italic; color: #777;">
-          Pre-launch or data not available yet
-        </td>
-      `;
-      tbody.appendChild(row);
-      continue;
-    } */
+    // Skip tokens with no live price
     if (currentPrice === 0) continue;
 
-
-    // Calculate values
+    // Calculate market cap
     const supply = 5000; // fixed supply per token
     const marketCap = (currentPrice * supply).toFixed(2);
 
-    // Format numbers or fallback to "N/A"
+    // Format display values
     const displayPrice = `$${currentPrice.toFixed(4)}`;
     const displayLiquidity = liquidity > 0 ? `$${liquidity.toFixed(2)}` : "N/A";
     const displayHolders = holders > 0 ? holders : "N/A";
@@ -103,15 +104,15 @@ async function renderTokenTable() {
       ? (((currentPrice - token.launchPrice) / token.launchPrice) * 100).toFixed(1)
       : "-";
 
-    // Format explorer link truncated
-    const truncated = token.mint.slice(0, 4) + "..." + token.mint.slice(-4);
+    // Truncate mint for explorer link
+    const truncated = `${token.mint.slice(0, 4)}...${token.mint.slice(-4)}`;
     const explorerURL = `https://solscan.io/token/${token.mint}`;
 
-    // Create table row with live data
+    // Create table row
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>
-        <img src="${token.image}" alt="${token.symbol}" />
+        <img src="${token.image}" alt="${token.symbol}" width="24" height="24" />
         <strong>${token.name}</strong> (${token.symbol})
       </td>
       <td>$${marketCap}</td>
@@ -127,5 +128,5 @@ async function renderTokenTable() {
 
 // Kick off table rendering on page load
 document.addEventListener("DOMContentLoaded", renderTokenTable);
-// Re-run every 60 seconds
+// Refresh every 60 seconds
 setInterval(renderTokenTable, 60000);
