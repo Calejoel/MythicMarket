@@ -12,32 +12,26 @@
       --section-gradient: linear-gradient(135deg, #d0f4ff, #a0d9ff);
       --header-gradient: linear-gradient(135deg, #004080, #001f3f);
       --text-color: #000;
-      --section-bg: #f0f8ff;
       --header-text: #fff;
     }
-
     [data-theme="dark"] {
       --bg-gradient: linear-gradient(135deg, #001f3f, #004080);
       --section-gradient: linear-gradient(135deg, #003366, #002244);
       --header-gradient: linear-gradient(135deg, #000c1a, #001f3f);
       --text-color: #fff;
-      --section-bg: #0c1b2a;
       --header-text: #fff;
     }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
     body {
       background: var(--bg-gradient);
       color: var(--text-color);
       font-family: Arial, sans-serif;
       line-height: 1.6;
     }
-
     a {
       color: #00c2ff;
       text-decoration: none;
@@ -45,7 +39,6 @@
     a:hover {
       text-decoration: underline;
     }
-
     header {
       position: relative;
       background: #000;
@@ -53,7 +46,6 @@
       text-align: center;
       padding: 2rem 1rem;
     }
-
     #theme-toggle {
       position: absolute;
       top: 1rem;
@@ -65,39 +57,27 @@
       border-radius: 5px;
       cursor: pointer;
     }
-
     header img {
       max-width: 220px;
       margin-bottom: 0.5rem;
     }
-
     header h1 {
       color: #fff;
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
     }
-
     header p {
       opacity: 0.8;
       font-size: 1rem;
     }
-
-    #countdown {
-      font-size: 1.5rem;
-      color: #ffcc00;
-      margin-top: 1rem;
-    }
-
     main {
       max-width: 800px;
       margin: 1.5rem auto;
       padding: 0 1rem;
     }
-
     details {
       margin-bottom: 1.5rem;
     }
-
     summary.section-title {
       font-size: 1.5rem;
       padding: 0.75rem 1rem;
@@ -106,15 +86,12 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
     .section-content {
       padding: 1rem;
       background: var(--section-gradient);
       border-radius: 8px;
       margin-top: 0.5rem;
     }
-
-    /* 🔥 Hide native disclosure markers */
     summary {
       list-style: none;
     }
@@ -124,7 +101,6 @@
       font-size: 0;
       color: transparent;
     }
-
     summary::before {
       content: "▶";
       display: inline-block;
@@ -135,79 +111,37 @@
     details[open] summary::before {
       transform: rotate(90deg);
     }
-
-    ul {
-      padding-left: 1.2rem;
-    }
-
-    .coins-table {
+    .countdown-table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 1rem;
     }
-
-    .coins-table th, .coins-table td {
+    .countdown-table th,
+    .countdown-table td {
       padding: 0.75rem;
-      border-bottom: 1px solid #ccc;
+      border: 1px solid #ccc;
       text-align: left;
     }
-
-    .coins-table th {
+    .countdown-table th {
       background: #005fa3;
       color: white;
     }
-
-    .coins-table img {
+    .countdown-table img {
       width: 24px;
       height: 24px;
       vertical-align: middle;
       margin-right: 0.5rem;
     }
-
-    .btn-link {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background: #1e1e1e;
-      color: #fff;
-      border-radius: 5px;
-    }
-
-    .community-section {
-      padding: 1.5rem;
-      background: var(--section-gradient);
-      border-radius: 8px;
-      margin: 1rem 0;
-    }
-
-    .community-links ul {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 1rem;
-    }
-
-    .community-links li {
-      margin-bottom: 0.5rem;
-    }
-
-    .voting-embed {
-      width: 100%;
-      height: 500px;
-      border: none;
-    }
-
     footer {
       text-align: center;
       margin: 2rem 0;
       color: var(--text-color);
       font-size: 0.9rem;
     }
-
     .social-icons a {
       margin: 0 0.5rem;
       display: inline-block;
     }
-
     .social-icons img {
       width: 28px;
       height: 28px;
@@ -219,78 +153,53 @@
     <button id="theme-toggle">Toggle Dark Mode</button>
     <img src="assets/MythicMarketLogo.png" alt="Mythic Market Logo" />
     <h1>Mythic Market</h1>
-    <p>Launching Low-Supply Micro Meme Coin Collectibles based on Mythical Gods — Voted by YOU</p>
-    <div id="countdown">Loading countdown…</div>
+    <p>Launching Low‐Supply Micro Meme Coin Collectibles based on Mythical Gods — Voted by YOU</p>
   </header>
 
   <main>
-    <!-- About Section -->
+    <!-- About Section (example) -->
     <details open>
       <summary class="section-title">About Mythic Market</summary>
       <div class="section-content">
         <p>
-          Mythic Market is a collection of low-supply micro meme coin collectibles on Solana — each inspired by mythical gods and launched based on community votes.<br><br>
-          We create and deploy each token with a fixed 5,000 supply, giving them high volatility, long-term potential, and collectible scarcity.<br><br>
-          Launch prices start low to reward early holders, and as the limited supply tightens, scarcity increases — fueling price swings and upside.<br><br>
-          Tokens are paired in SOL/USDC dual pools via Meteora, or SOL-only, depending on the strategy. Liquidity is locked. Buybacks and burns increase rarity.<br><br>
+          Mythic Market is a collection of low‐supply micro meme coin collectibles on Solana — each inspired by mythical gods and launched based on community votes.<br><br>
+          We deploy each token with a fixed 5,000 supply, giving them high volatility, long‐term potential, and collectible scarcity.<br><br>
+          Launch prices start low to reward early holders; as supply tightens, scarcity grows—fueling price swings and upside.<br><br>
+          Tokens pair in SOL/USDC dual pools via Meteora (or SOL‐only, depending on strategy). Liquidity is locked; buybacks and burns increase rarity.<br><br>
           <strong>Collect the gods. Trade the legends. Hold the volatility.</strong>
         </p>
       </div>
     </details>
 
-    <!-- Token Details Section -->
+    <!-- Countdown Table Section -->
     <details open>
-      <summary class="section-title">Token Details (Next Launch)</summary>
+      <summary class="section-title">Upcoming Token Launches</summary>
       <div class="section-content">
-        <ul>
-          <li><strong>Token Name:</strong> Soon</li>
-          <li><strong>Symbol:</strong> ????</li>
-          <li><strong>Blockchain:</strong> Solana</li>
-          <li><strong>Total Supply:</strong> 5,000</li>
-          <li><strong>Launch Date:</strong> <span id="mint-date">June 6, 2025 @ 19:00 UTC</span></li>
-        </ul>
-        <a class="btn-link" href="https://explorer.solana.com/address/YOUR_TOKEN_MINT_ADDRESS" target="_blank">
-          View on Solana Explorer
-        </a>
-      </div>
-    </details>
-
-    <!-- Launched Coins Section -->
-    <details open>
-      <summary class="section-title">Launched Coins</summary>
-      <div class="section-content">
-        <p>Tokens Mythic Market has launched so far. Stats are pulled live using Jupiter and Solscan APIs.</p>
-        <table class="coins-table">
+        <table class="countdown-table">
           <thead>
             <tr>
               <th>Token</th>
-              <th>Market Cap</th>
-              <th>Price</th>
-              <th>Holders</th>
-              <th>Liquidity</th>
-              <th>+% Since Launch</th>
-              <th>Explorer</th>
+              <th>Launch Date (UTC)</th>
+              <th>Countdown / Link</th>
             </tr>
           </thead>
           <tbody id="token-data">
-            <!-- Rows will be inserted here by JS -->
+            <!-- JS will insert rows here -->
           </tbody>
         </table>
       </div>
     </details>
 
-    <!-- Community & Voting Section -->
+    <!-- Community & Voting Section (example) -->
     <details open>
       <summary class="section-title">Join the Community & Vote</summary>
-      <div class="section-content community-section">
-        <p>Connect with fellow Mythic Market holders, discuss strategies, and cast your vote for the next god-themed coin:</p>
-        <div class="community-links">
-          <ul>
-            <li><a href="https://t.me/MythicalMarket" target="_blank">Telegram</a></li>
-            <li><a href="https://x.com/Mythic_Market" target="_blank">Twitter (X)</a></li>
-            <li><a href="https://discord.gg/g5wBE95Zpc" target="_blank">Discord</a></li>
-          </ul>
-        </div>
+      <div class="section-content">
+        <p>Connect with Mythic Market holders and vote for the next god‐themed coin:</p>
+        <ul class="community-links">
+          <li><a href="https://t.me/MythicalMarket" target="_blank">Telegram</a></li>
+          <li><a href="https://x.com/Mythic_Market" target="_blank">Twitter (X)</a></li>
+          <li><a href="https://discord.gg/g5wBE95Zpc" target="_blank">Discord</a></li>
+        </ul>
         <iframe src="https://strawpoll.com/embed/GeZARamWbyV" class="voting-embed" allowfullscreen></iframe>
       </div>
     </details>
@@ -306,181 +215,132 @@
   </footer>
 
   <!-- ========================= -->
-  <!-- COUNTDOWN & DARK MODE JS -->
+  <!-- DARK MODE TOGGLE SCRIPT -->
   <!-- ========================= -->
   <script>
-    const countdownTarget = new Date("2025-06-06T19:00:00Z").getTime();
-    const countdown = document.getElementById("countdown");
-
-    setInterval(() => {
-      const now = Date.now();
-      const diff = countdownTarget - now;
-
-      if (diff <= 0) {
-        countdown.innerText = "🚀 Mythic Market Is Live!";
-        return;
-      }
-
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / (1000 * 60)) % 60);
-      const s = Math.floor((diff / 1000) % 60);
-
-      countdown.innerText = `${d}d ${h}h ${m}m ${s}s`;
-    }, 1000);
-
-    // Dark mode toggle
     const root = document.documentElement;
     const themeToggle = document.getElementById('theme-toggle');
     const saved = localStorage.getItem('theme');
-
     if (saved) {
       root.setAttribute('data-theme', saved);
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       root.setAttribute('data-theme', 'dark');
     }
-
     themeToggle.addEventListener('click', () => {
       const current = root.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
+      const next = (current === 'dark' ? 'light' : 'dark');
       root.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
     });
   </script>
 
   <!-- ========================= -->
-  <!-- LIVE TOKENS SCRIPT -->
+  <!-- COUNTDOWN + TABLE SCRIPT -->
   <!-- ========================= -->
   <script>
-    // =========================
-    // CONFIGURATION SECTION
-    // =========================
+    // 1) CONFIGURE YOUR TOKENS HERE
     const tokenData = [
       {
         name: "ARES",
         symbol: "ARES",
         image: "assets/ARES.png",
-        jupiterId: "SOL", 
-        mint: "So11111111111111111111111111111111111111112",
-        launchPrice: 0.5,
+        mint: "HJ8Z8qkLXKS8HLCQEFquTXierjZKLnnkBAn4nTaDBZy1",
+        // Launch date in ISO 8601 (UTC):
+        launchDate: "2025-06-06T19:00:00Z"
       },
       {
-        name: "USDC",
-        symbol: "USDC",
-        image: "assets/USDC.png",
-        jupiterId: "USDC",
-        mint: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-        launchPrice: 1.0,
+        name: "ZEUS",
+        symbol: "ZEUS",
+        image: "assets/ZEUS.png",
+        mint: "Ft9xosgWQZg8YpHfB8a5T7kWQZmoMvuz8xjPNg9GkH2J",
+        launchDate: "2025-06-10T15:00:00Z"
       },
       {
-        name: "RAY",
-        symbol: "RAY",
-        image: "assets/RAY.png",
-        jupiterId: "RAY",
-        mint: "4k3Dyjzvzp8e6N2XfCFV5jv3s5ZD5N6t2nT2sW1LL1aM",
-        launchPrice: 2.0,
+        name: "THOR",
+        symbol: "THOR",
+        image: "assets/THOR.png",
+        mint: "D3b9sRkAbXyLk3QWz7CeW8nXjZ4yYv7QMjKqG9tH7E",
+        launchDate: "2025-06-15T12:00:00Z"
       },
-      // Add your own coin here once it’s live on Jupiter…
+      // Add more tokens similarly...
     ];
 
-    // =========================
-    // HELPER: Fetch price via Jupiter (using jupiterId)
-    // =========================
-    async function fetchPrice(jupiterId) {
-      try {
-        const res = await fetch(`https://quote-api.jup.ag/v6/price?ids=${jupiterId}`);
-        if (!res.ok) {
-          console.warn(`Jupiter price fetch failed for ${jupiterId}: ${res.status}`);
-          return 0;
-        }
-        const json = await res.json();
-        const price = json.data[jupiterId]?.price || 0;
-        return price;
-      } catch (err) {
-        console.error(`Error fetching Jupiter price for ${jupiterId}:`, err);
-        return 0;
-      }
+    // 2) UTILITY: Format a mint address as "xxxx...xxxx"
+    function truncateMint(mint) {
+      return mint.slice(0, 4) + "..." + mint.slice(-4);
     }
 
-    // =========================
-    // HELPER: Fetch holders & liquidity via Solscan (using mint)
-    // =========================
-    async function fetchSolscanData(mintAddress) {
-      try {
-        const res = await fetch(`https://public-api.solscan.io/token/meta?tokenAddress=${mintAddress}`);
-        if (!res.ok) {
-          console.warn(`Solscan fetch failed for ${mintAddress}: ${res.status}`);
-          return { holders: 0, liquidity: 0 };
-        }
-        const json = await res.json();
-        const holders = json.holderCount || 0;
-        const liquidity = json.liquidity || 0;
-        return { holders, liquidity };
-      } catch (err) {
-        console.error(`Error fetching Solscan data for ${mintAddress}:`, err);
-        return { holders: 0, liquidity: 0 };
-      }
-    }
-
-    // =========================
-    // RENDER FUNCTION: Populate the table with live data (placeholders if missing)
-    // =========================
-    async function renderTokenTable() {
+    // 3) Build table rows and start countdowns
+    function renderTokenRows() {
       const tbody = document.getElementById("token-data");
-      tbody.innerHTML = ""; // Clear existing rows
+      tbody.innerHTML = ""; // clear existing rows
 
-      for (const token of tokenData) {
-        console.log(`Fetching data for: ${token.symbol}`);
-
-        // 1) Price (Jupiter)
-        const currentPrice = await fetchPrice(token.jupiterId);
-        console.log(`Price for ${token.symbol}:`, currentPrice);
-
-        // 2) Holders & Liquidity (Solscan)
-        const { holders, liquidity } = await fetchSolscanData(token.mint);
-        console.log(`Holders for ${token.symbol}:`, holders, `Liquidity:`, liquidity);
-
-        // 3) Prepare display values (using “N/A” where needed)
-        const displayPrice = currentPrice > 0
-          ? `$${currentPrice.toFixed(4)}`
-          : "N/A";
-
-        const supply = 5000;
-        const marketCap = currentPrice > 0
-          ? `$${(currentPrice * supply).toFixed(2)}`
-          : "N/A";
-
-        const displayHolders = holders > 0 ? holders : "N/A";
-        const displayLiquidity = liquidity > 0 ? `$${liquidity.toFixed(2)}` : "N/A";
-
-        const lifetimeGain = currentPrice > 0 && token.launchPrice
-          ? `${(((currentPrice - token.launchPrice) / token.launchPrice) * 100).toFixed(1)}%`
-          : "N/A";
-
-        const truncated = `${token.mint.slice(0, 4)}...${token.mint.slice(-4)}`;
-        const explorerURL = `https://solscan.io/token/${token.mint}`;
-
-        // 4) Build the row (always include it)
+      tokenData.forEach((token, index) => {
+        // Create row and cells
         const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>
-            <img src="${token.image}" alt="${token.symbol}" width="24" height="24" />
-            <strong>${token.name}</strong> (${token.symbol})
-          </td>
-          <td>${marketCap}</td>
-          <td>${displayPrice}</td>
-          <td>${displayHolders}</td>
-          <td>${displayLiquidity}</td>
-          <td>${lifetimeGain}</td>
-          <td><a href="${explorerURL}" target="_blank">${truncated}</a></td>
+
+        // Token cell: image + name (symbol)
+        const tokenCell = document.createElement("td");
+        tokenCell.innerHTML = `
+          <img src="${token.image}" alt="${token.symbol}" width="24" height="24" />
+          <strong>${token.name}</strong> (${token.symbol})
         `;
+        row.appendChild(tokenCell);
+
+        // Launch date (static text)
+        const launchCell = document.createElement("td");
+        // Show human‐readable date/time
+        const launchDateObj = new Date(token.launchDate);
+        launchCell.innerText = launchDateObj.toUTCString().replace(" GMT", "");
+        row.appendChild(launchCell);
+
+        // Countdown cell: will update every second
+        const countdownCell = document.createElement("td");
+        countdownCell.id = `countdown-${index}`;
+        row.appendChild(countdownCell);
+
+        // Append row to table body
         tbody.appendChild(row);
-      }
+
+        // Kick off countdown for this token
+        startCountdown(token.launchDate, token.mint, countdownCell.id);
+      });
     }
 
-    // Initialize on page load
-    document.addEventListener("DOMContentLoaded", renderTokenTable);
-    setInterval(renderTokenTable, 60000); // Refresh every minute
+    // 4) Start a countdown on a given cell (by element ID)
+    function startCountdown(isoLaunchDate, mint, elementId) {
+      const targetTime = new Date(isoLaunchDate).getTime();
+      const cell = document.getElementById(elementId);
+
+      function update() {
+        const now = Date.now();
+        const diff = targetTime - now;
+
+        if (diff <= 0) {
+          // Launch time reached or passed → replace cell with Solscan link
+          const truncated = truncateMint(mint);
+          cell.innerHTML = `<a href="https://solscan.io/token/${mint}" target="_blank">${truncated}</a>`;
+          clearInterval(intervalId);
+          return;
+        }
+
+        // Calculate days, hours, minutes, seconds
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        // Display "Xd Xh Xm Xs"
+        cell.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+
+      // Initial call & then update every second
+      update();
+      const intervalId = setInterval(update, 1000);
+    }
+
+    // 5) When page loads, render the rows
+    document.addEventListener("DOMContentLoaded", renderTokenRows);
   </script>
 </body>
 </html>
