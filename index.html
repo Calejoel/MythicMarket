@@ -78,20 +78,24 @@
     details {
       margin-bottom: 1.5rem;
     }
-   summary.section-title {
-  font-size: 1.5rem;
-  padding: 0.75rem 1rem;
-  background: var(--header-gradient);
-  color: var(--header-text);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-   }
+    
+    /* Updated section-title summary styles */
+    summary.section-title {
+      font-size: 1.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--header-gradient);
+      color: var(--header-text);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      outline: none; /* remove default focus outline */
+    }
     summary.section-title:hover,
     summary.section-title:focus {
       background-color: #005fa3;
-      outline: none;
+      color: #00f0ff; /* neon cyan */
     }
+    
     .section-content {
       padding: 1rem;
       background: var(--section-gradient);
@@ -100,6 +104,8 @@
     }
     summary {
       list-style: none;
+      transition: color 0.3s ease;
+      outline: none; /* remove default focus outline */
     }
     summary::marker,
     summary::-webkit-details-marker {
@@ -122,34 +128,56 @@
       color: #004080;
       outline: none;
     }
-    /* Specific style for nested 'How to Vote' summary */
-details details > summary {
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 1rem;
-  padding-left: 0.25rem;
-  transition: color 0.3s ease;
-}
 
-details details > summary:hover,
-details details > summary:focus {
-  color: #004080;
-}
+    /* Updated nested 'How to Vote' summary styles */
+    details details > summary {
+      position: relative;
+      padding-left: 1.5em;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--text-color);
+      transition: color 0.3s ease;
+      outline: none;
+    }
+
+    details details > summary:hover,
+    details details > summary:focus {
+      color: #00f0ff; /* neon cyan */
+    }
+
+    details details > summary::before {
+      content: "▶";
+      position: absolute;
+      left: 0.3em;
+      top: 50%;
+      transform: translateY(-50%) rotate(0deg);
+      transition: transform 0.2s ease-in-out;
+      color: var(--text-color);
+    }
+
+    details details[open] > summary::before {
+      transform: translateY(-50%) rotate(90deg);
+    }
+
+    details details[open] > summary {
+      color: #00f0ff;
+    }
+
     /* View Live Results button hover */
-.view-results-button {
-  background: #004080;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  text-decoration: none;
-  display: inline-block;
-  transition: background-color 0.3s ease;
-}
-.view-results-button:hover,
-.view-results-button:focus {
-  background-color: #0066cc;
-  outline: none;
-}
+    .view-results-button {
+      background: #004080;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+    .view-results-button:hover,
+    .view-results-button:focus {
+      background-color: #0066cc;
+      outline: none;
+    }
     .countdown-table {
       width: 100%;
       border-collapse: collapse;
@@ -186,22 +214,22 @@ details details > summary:focus {
       height: 28px;
     }
     .community-links ul {
-    list-style: disc;
-    padding-left: 1.5rem; /* Increased padding */
-    margin-top: 0.75rem;
-    margin-bottom: 0;
-  }
+      list-style: disc;
+      padding-left: 1.5rem; /* Increased padding */
+      margin-top: 0.75rem;
+      margin-bottom: 0;
+    }
     .community-links li {
-    margin-bottom: 0.5rem; /* Optional: add space between items */
-  }
+      margin-bottom: 0.5rem; /* Optional: add space between items */
+    }
     .voting-embed {
-    width: 100%;
-    height: 480px;
-    border: none;
-    border-radius: 8px;
-    max-width: 100%;
-    display: block;
-  }
+      width: 100%;
+      height: 480px;
+      border: none;
+      border-radius: 8px;
+      max-width: 100%;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -246,44 +274,41 @@ details details > summary:focus {
       </div>
     </details>
     
- <details open>
-  <summary class="section-title">Vote for the Next God</summary>
-  <div class="section-content">
-    <p>
-      Select from a community-curated list of mythic gods. One of top voted gods will be the next micro meme coin collectible launched on Mythic Market! You get 10 votes every week.
-    </p>
+    <details open>
+      <summary class="section-title">Vote for the Next God</summary>
+      <div class="section-content">
+        <p>
+          Select from a community-curated list of mythic gods. One of top voted gods will be the next micro meme coin collectible launched on Mythic Market! You get 10 votes every week.
+        </p>
 
-    <!-- Instructions with collapsible help -->
-    <details>
-      <summary>How to Vote</summary>
-      <div style="padding: 0.5rem 1rem;">
-        <ul>
-          <li>Scroll the embedded list below.</li>
-          <li>Select up to 10 gods you want to see launched next.</li>
-          <li>Click <strong>Vote</strong> to submit your picks.</li>
-        </ul>
+        <!-- Instructions with collapsible help -->
+        <details>
+          <summary>How to Vote</summary>
+          <div style="padding: 0.5rem 1rem;">
+            <ul>
+              <li>Scroll the embedded list below.</li>
+              <li>Select up to 10 gods you want to see launched next.</li>
+              <li>Click <strong>Vote</strong> to submit your picks.</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Scrollable embed container with fixed inner height -->
+        <div style="height: 600px; overflow: hidden; border: 2px solid #ccc; border-radius: 8px; margin-top: 1rem;">
+          <iframe src="https://strawpoll.com/embed/GeZARamWbyV" 
+                  style="width: 100%; height: 100%; border: none; display: block; border-radius: 8px; overflow-y: auto;">
+          </iframe>
+        </div>
+
+        <!-- Results Button with hover effect -->
+        <div style="text-align: center; margin-top: 1rem;">
+          <a href="https://strawpoll.com/GeZARamWbyV/results" target="_blank" 
+             class="view-results-button">
+            View Live Results
+          </a>
+        </div>
       </div>
     </details>
-
-    <!-- Scrollable embed container with fixed inner height -->
-    <div style="height: 600px; overflow: hidden; border: 2px solid #ccc; border-radius: 8px; margin-top: 1rem;">
-      <iframe src="https://strawpoll.com/embed/GeZARamWbyV" 
-              style="width: 100%; height: 100%; border: none; display: block; border-radius: 8px; overflow-y: auto;">
-      </iframe>
-    </div>
-
-    <!-- Results Button with hover effect -->
-    <div style="text-align: center; margin-top: 1rem;">
-      <a href="https://strawpoll.com/GeZARamWbyV/results" target="_blank" 
-         class="view-results-button">
-        View Live Results
-      </a>
-    </div>
-  </div>
-</details>
-
-
-
   </main>
 
   <footer>
@@ -372,36 +397,30 @@ details details > summary:focus {
         const launchCell = document.createElement("td");
         // Show human‐readable date/time
         const launchDateObj = new Date(token.launchDate);
-        launchCell.innerText = launchDateObj.toUTCString().replace(" GMT", "");
+        launchCell.innerText = launchDateObj.toUTCString();
         row.appendChild(launchCell);
 
-        // Countdown cell: will update every second
+        // Countdown / Link cell
         const countdownCell = document.createElement("td");
-        countdownCell.id = `countdown-${index}`;
+        countdownCell.id = "countdown-" + index;
         row.appendChild(countdownCell);
 
-        // Append row to table body
         tbody.appendChild(row);
-
-        // Kick off countdown for this token
-        startCountdown(token.launchDate, token.mint, countdownCell.id);
       });
     }
 
-    // 4) Start a countdown on a given cell (by element ID)
-    function startCountdown(isoLaunchDate, mint, elementId) {
-      const targetTime = new Date(isoLaunchDate).getTime();
-      const cell = document.getElementById(elementId);
+    // 4) Countdown update loop
+    function updateCountdowns() {
+      tokenData.forEach((token, index) => {
+        const now = new Date();
+        const launchDate = new Date(token.launchDate);
+        const diff = launchDate - now;
 
-      function update() {
-        const now = Date.now();
-        const diff = targetTime - now;
+        const countdownCell = document.getElementById("countdown-" + index);
+        if (!countdownCell) return;
 
         if (diff <= 0) {
-          // Launch time reached or passed → replace cell with Solscan link
-          const truncated = truncateMint(mint);
-          cell.innerHTML = `<a href="https://solscan.io/token/${mint}" target="_blank">${truncated}</a>`;
-          clearInterval(intervalId);
+          countdownCell.innerHTML = `<em>Launched</em>`;
           return;
         }
 
@@ -411,17 +430,37 @@ details details > summary:focus {
         const minutes = Math.floor((diff / (1000 * 60)) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
 
-        // Display "Xd Xh Xm Xs"
-        cell.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-      }
-
-      // Initial call & then update every second
-      update();
-      const intervalId = setInterval(update, 1000);
+        countdownCell.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      });
     }
 
-    // 5) When page loads, render the rows
-    document.addEventListener("DOMContentLoaded", renderTokenRows);
+    // Run at start
+    renderTokenRows();
+    updateCountdowns();
+    // Update every second
+    setInterval(updateCountdowns, 1000);
+  </script>
+
+  <!-- ========================= -->
+  <!-- SUMMARY COLOR RESET SCRIPT -->
+  <!-- ========================= -->
+  <script>
+    // Reset summary color on blur (when clicking away)
+    document.querySelectorAll('summary').forEach(summary => {
+      summary.addEventListener('blur', () => {
+        summary.style.color = '';
+      });
+
+      // Optional: ensure color resets on click outside
+      summary.addEventListener('click', () => {
+        // Delay blur reset for accessibility (some browsers)
+        setTimeout(() => {
+          if (document.activeElement !== summary) {
+            summary.style.color = '';
+          }
+        }, 100);
+      });
+    });
   </script>
 </body>
 </html>
