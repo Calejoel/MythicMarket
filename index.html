@@ -264,4 +264,129 @@
         <!-- Scrollable embed container -->
         <div style="height: 600px; overflow: hidden; border: 2px solid #ccc; border-radius: 8px; margin-top: 1rem;">
           <iframe src="https://strawpoll.com/embed/GeZARamWbyV" 
-                  style="width: 100%; height:
+                  style="width: 100%; height: 100%; border: none; display: block; border-radius: 8px; overflow-y: auto;">
+          </iframe>
+        </div>
+
+        <!-- Results Button -->
+        <div style="text-align: center; margin-top: 1rem;">
+          <a href="https://strawpoll.com/GeZARamWbyV/results" target="_blank" 
+             class="view-results-button">
+            View Live Results
+          </a>
+        </div>
+      </div>
+    </details>
+
+    <!-- Community Section -->
+    <details open>
+      <summary class="section-title">Join Our Community</summary>
+      <div class="section-content community-links">
+        <p>Connect and discuss upcoming launches, voting, and more.</p>
+        <ul>
+          <li><a href="https://twitter.com/MythicMarket" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+          <li><a href="https://discord.gg/mythicmarket" target="_blank" rel="noopener noreferrer">Discord</a></li>
+          <li><a href="https://t.me/mythicmarket" target="_blank" rel="noopener noreferrer">Telegram</a></li>
+        </ul>
+      </div>
+    </details>
+  </main>
+
+  <footer>
+    <div class="social-icons">
+      <a href="https://twitter.com/MythicMarket" target="_blank" rel="noopener noreferrer">
+        <img src="assets/twitter.svg" alt="Twitter" />
+      </a>
+      <a href="https://discord.gg/mythicmarket" target="_blank" rel="noopener noreferrer">
+        <img src="assets/discord.svg" alt="Discord" />
+      </a>
+      <a href="https://t.me/mythicmarket" target="_blank" rel="noopener noreferrer">
+        <img src="assets/telegram.svg" alt="Telegram" />
+      </a>
+    </div>
+    <p>© 2025 Mythic Market. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Dark mode toggle script
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      if(document.documentElement.getAttribute('data-theme') === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    // Apply saved theme on load
+    window.addEventListener('DOMContentLoaded', () => {
+      if(localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    });
+
+    // Countdown logic for tokens
+    const tokens = [
+      {
+        name: 'Zeus',
+        launchDate: new Date(Date.UTC(2025, 5, 15, 12, 0, 0)), // June 15 2025 12:00 UTC
+        link: 'https://solscan.io/token/ZeusTokenAddress'
+      },
+      {
+        name: 'Athena',
+        launchDate: new Date(Date.UTC(2025, 5, 22, 12, 0, 0)), // June 22 2025 12:00 UTC
+        link: 'https://solscan.io/token/AthenaTokenAddress'
+      },
+      {
+        name: 'Hades',
+        launchDate: new Date(Date.UTC(2025, 5, 29, 12, 0, 0)), // June 29 2025 12:00 UTC
+        link: 'https://solscan.io/token/HadesTokenAddress'
+      }
+    ];
+
+    function updateCountdown() {
+      const tbody = document.getElementById('token-data');
+      tbody.innerHTML = '';
+
+      const now = new Date();
+
+      tokens.forEach(token => {
+        const tr = document.createElement('tr');
+
+        const nameTd = document.createElement('td');
+        nameTd.textContent = token.name;
+        tr.appendChild(nameTd);
+
+        const launchTd = document.createElement('td');
+        launchTd.textContent = token.launchDate.toUTCString();
+        tr.appendChild(launchTd);
+
+        const countdownTd = document.createElement('td');
+
+        if (now < token.launchDate) {
+          const diff = token.launchDate - now;
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((diff / (1000 * 60)) % 60);
+          const seconds = Math.floor((diff / 1000) % 60);
+          countdownTd.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        } else {
+          const link = document.createElement('a');
+          link.href = token.link;
+          link.target = '_blank';
+          link.textContent = 'View Token';
+          countdownTd.appendChild(link);
+        }
+
+        tr.appendChild(countdownTd);
+        tbody.appendChild(tr);
+      });
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
