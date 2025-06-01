@@ -23,7 +23,6 @@ const tokenData = [
     mint: "YOUR_MINT_ADDRESS_3",
     launchPrice: 0.5,
   },
-  // Add more tokens here as needed...
 ];
 
 // =========================
@@ -65,50 +64,59 @@ async function renderTokenTable() {
   tbody.innerHTML = ""; // Clear existing rows
 
   for (const token of tokenData) {
-    // 1) Fetch live price
+    console.log(`Fetching data for: ${token.symbol}`);
+
     const currentPrice = await fetchPrice(token.mint);
+    console.log(`Price for ${token.symbol}:`, currentPrice);
 
-    // 2) Fetch holders & liquidity
     const { holders, liquidity } = await fetchSolscanData(token.mint);
+    console.log(`Holders for ${token.symbol}:`, holders, `Liquidity:`, liquidity);
 
+    // If price is zero or missing, show a friendly pre-launch row
+    if (currentPrice === 0) {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>
+          <img src="${token.image}" alt="${token.symbol}" />
+          <strong>${token.name}</strong> (${token.symbol})
+        </td>
+        <td colspan="6" style="text-align:center; font-style: italic; color: #777;">
+          Pre-launch or data not available yet
+        </td>
+      `;
+      tbody.appendChild(row);
+      continue;
+    }
+
+    // Calculate values
     const supply = 5000; // fixed supply per token
+    const marketCap = (currentPrice * supply).toFixed(2);
 
-    // 3) Determine display values based on data availability
+    // Format numbers or fallback to "N/A"
+    const displayPrice = `$${currentPrice.toFixed(4)}`;
+    const displayLiquidity = liquidity > 0 ? `$${liquidity.toFixed(2)}` : "N/A";
+    const displayHolders = holders > 0 ? holders : "N/A";
 
-    // Price to show: currentPrice if > 0 else launchPrice as fallback
-    const displayPrice = currentPrice > 0 ? currentPrice : token.launchPrice;
+    const lifetimeGain = token.launchPrice
+      ? (((currentPrice - token.launchPrice) / token.launchPrice) * 100).toFixed(1)
+      : "-";
 
-    // Market cap only if price live, else show '-'
-    const marketCap = currentPrice > 0 ? (currentPrice * supply).toFixed(2) : "-";
-
-    // Holders - if zero, show 0 (could be no holders yet)
-    const displayHolders = holders > 0 ? holders : "0";
-
-    // Liquidity - if zero, show 'TBA'
-    const displayLiquidity = liquidity > 0 ? `$${liquidity.toFixed(2)}` : "TBA";
-
-    // Lifetime gain only if currentPrice > 0, else '-'
-    const lifetimeGain =
-      currentPrice > 0
-        ? (((currentPrice - token.launchPrice) / token.launchPrice) * 100).toFixed(1) + "%"
-        : "-";
-
-    // Truncate mint for explorer link
+    // Format explorer link truncated
     const truncated = token.mint.slice(0, 4) + "..." + token.mint.slice(-4);
     const explorerURL = `https://solscan.io/token/${token.mint}`;
 
-    // 4) Create row with fallback placeholders for pre-launch
+    // Create table row with live data
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>
         <img src="${token.image}" alt="${token.symbol}" />
         <strong>${token.name}</strong> (${token.symbol})
       </td>
-      <td>${marketCap === "-" ? "Pending" : "$" + marketCap}</td>
-      <td>$${displayPrice.toFixed(4)}</td>
+      <td>$${marketCap}</td>
+      <td>${displayPrice}</td>
       <td>${displayHolders}</td>
       <td>${displayLiquidity}</td>
-      <td>${lifetimeGain}</td>
+      <td>${lifetimeGain}%</td>
       <td><a href="${explorerURL}" target="_blank">${truncated}</a></td>
     `;
     tbody.appendChild(row);
@@ -117,5 +125,5 @@ async function renderTokenTable() {
 
 // Kick off table rendering on page load
 document.addEventListener("DOMContentLoaded", renderTokenTable);
-// Refresh every 60 seconds
+// Re-run every 60 seconds
 setInterval(renderTokenTable, 60000);
