@@ -6,7 +6,7 @@ const tokenData = [
     name: "ARES",
     symbol: "ARES",
     image: "assets/ARES.png",
-    mint: "BdG7cdEDCYHqQz7XeGa5n3azLSCcduFjrsYsW5sRaVhw",
+    mint: "So11111111111111111111111111111111111111112",
     launchPrice: 0.5,
   },
   {
