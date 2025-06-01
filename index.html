@@ -254,7 +254,7 @@
 
   <main>
     <!-- About Section (example) -->
-  <details open>
+  <details id="about-section" open>
   <summary class="section-title">About Mythic Market</summary>
   <div class="section-content spaced-paragraphs">
     <p>
@@ -287,10 +287,10 @@
   </div>
 </details>
 
-<details open>
+<details id="manifesto-section" open>
   <summary class="section-title">Mythic Market Manifesto</summary>
   <div class="section-content spaced-paragraphs">
-    <p><strong>Championing Fairness, Transparency, and Community in Crypto Collectibles</strong></p> <br></br>
+    <p><strong>Championing Fairness, Transparency, and Community in Crypto Collectibles</strong></p>
     <p>
       We are united by a shared belief in the founding ideals of cryptocurrency: openness, fairness, and decentralized control. We reject the growing tide of projects that prioritize quick profits, hidden agendas, or exploit the trust of their communities.
     </p>
@@ -527,5 +527,24 @@
       });
     });
   </script>
+  <script>
+  // For every <details> element
+  document.querySelectorAll("details").forEach((details) => {
+    const id = details.id;
+
+    // Load state from localStorage
+    const isOpen = localStorage.getItem(`details-${id}`);
+    if (isOpen === "true") {
+      details.open = true;
+    } else if (isOpen === "false") {
+      details.open = false;
+    }
+
+    // Save state on toggle
+    details.addEventListener("toggle", () => {
+      localStorage.setItem(`details-${id}`, details.open);
+    });
+  });
+</script>
 </body>
 </html>
