@@ -265,21 +265,22 @@
     <!-- Countdown Table Section -->
     <details open>
       <summary class="section-title">Upcoming Token Launches</summary>
-      <div class="section-content">
-        <table class="countdown-table">
-          <thead>
+      <div class="section-content overflow-hidden rounded-t-2xl">
+        <table class="countdown-table w-full border-collapse">
+          <thead class="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white">
             <tr>
-              <th>Token</th>
-              <th>Launch Date (UTC)</th>
-              <th>Countdown / Link</th>
+              <th class="px-4 py-2 rounded-tl-2xl text-left">Token</th>
+              <th class="px-4 py-2 text-left">Launch Date (UTC)</th>
+              <th class="px-4 py-2 rounded-tr-2xl text-left">Countdown / Link</th>
             </tr>
           </thead>
-          <tbody id="token-data">
-            <!-- JS will insert rows here -->
+          <tbody id="token-data" class="bg-white dark:bg-gray-900">
+        <!-- JS will insert rows here -->
           </tbody>
         </table>
       </div>
     </details>
+
     
     <details open>
       <summary class="section-title">Vote for the Next God</summary>
@@ -361,15 +362,15 @@
         name: "ZEUS",
         symbol: "ZEUS",
         image: "assets/ZEUS.png",
-        mint: "So11111111111111111111111111111111111111112",
-        launchDate: "2025-06-01T18:00:00Z"
+        mint: "null",
+        launchDate: "2025-06-013T19:00:00Z"
       },
       {
         name: "THOR",
         symbol: "THOR",
         image: "assets/THOR.png",
-        mint: "So11111111111111111111111111111111111111112",
-        launchDate: "2025-06-01T18:32:00Z"
+        mint: "null",
+        launchDate: "2025-06-20T19:00:00Z"
       },
       // Add more tokens similarly...
     ];
