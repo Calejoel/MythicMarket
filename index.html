@@ -57,6 +57,16 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
+    /* Dark mode toggle button hover */
+    #theme-toggle:hover,
+    #theme-toggle:focus {
+      background-color: #007acc;
+      outline: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
     header img {
       max-width: 220px;
       margin-bottom: 0.5rem;
@@ -129,27 +139,13 @@
       outline: none;
     }
 
-    /* Updated nested 'How to Vote' summary styles */
-    details details > summary {
-      position: relative;
-      padding-left: 1.5em;
-      cursor: pointer;
-      font-weight: 700;
-      color: var(--text-color);
-      transition: color 0.3s ease;
-      outline: none;
-    }
-
-    details details > summary:hover,
-    details details > summary:focus {
-      color: #00f0ff; /* neon cyan */
-    }
-
+    /* Fix nested arrow rotation */
     details details > summary::before {
       content: "▶";
       position: absolute;
       left: 0.3em;
       top: 50%;
+      transform-origin: center; /* <-- FIXED */
       transform: translateY(-50%) rotate(0deg);
       transition: transform 0.2s ease-in-out;
       color: var(--text-color);
@@ -278,189 +274,64 @@
       <summary class="section-title">Vote for the Next God</summary>
       <div class="section-content">
         <p>
-          Select from a community-curated list of mythic gods. One of top voted gods will be the next micro meme coin collectible launched on Mythic Market! You get 10 votes every week.
+          Select from a community-curated list of mythic gods. One of top voted gods will be the next micro meme coin collectible launched on Mythic Market.<br><br>
+          <a href="https://voting.url" class="view-results-button">View Live Results</a>
         </p>
-
-        <!-- Instructions with collapsible help -->
-        <details>
-          <summary>How to Vote</summary>
-          <div style="padding: 0.5rem 1rem;">
-            <ul>
-              <li>Scroll the embedded list below.</li>
-              <li>Select up to 10 gods you want to see launched next.</li>
-              <li>Click <strong>Vote</strong> to submit your picks.</li>
-            </ul>
-          </div>
-        </details>
-
-        <!-- Scrollable embed container with fixed inner height -->
-        <div style="height: 600px; overflow: hidden; border: 2px solid #ccc; border-radius: 8px; margin-top: 1rem;">
-          <iframe src="https://strawpoll.com/embed/GeZARamWbyV" 
-                  style="width: 100%; height: 100%; border: none; display: block; border-radius: 8px; overflow-y: auto;">
-          </iframe>
-        </div>
-
-        <!-- Results Button with hover effect -->
-        <div style="text-align: center; margin-top: 1rem;">
-          <a href="https://strawpoll.com/GeZARamWbyV/results" target="_blank" 
-             class="view-results-button">
-            View Live Results
-          </a>
-        </div>
       </div>
     </details>
   </main>
 
   <footer>
-    <p>© 2025 Mythic Market. Not financial advice. DYOR.</p>
-    <div class="social-icons">
-      <a href="https://x.com/Mythic_Market" target="_blank"><img src="assets/twitter-icon.png" alt="Twitter" /></a>
-      <a href="https://t.me/MythicalMarket" target="_blank"><img src="assets/telegram-icon.png" alt="Telegram" /></a>
-      <a href="https://discord.gg/g5wBE95Zpc" target="_blank"><img src="assets/discord-icon.png" alt="Discord" /></a>
+    <div class="community-links">
+      <ul>
+        <li>Join the Mythic Market community:</li>
+        <li><a href="https://twitter.com/mythicmarket">Twitter</a></li>
+        <li><a href="https://discord.com/mythicmarket">Discord</a></li>
+        <li><a href="https://t.me/mythicmarket">Telegram</a></li>
+      </ul>
     </div>
+    <div class="social-icons">
+      <a href="https://twitter.com/mythicmarket"><img src="assets/twitter-icon.png" alt="Twitter"></a>
+      <a href="https://discord.com/mythicmarket"><img src="assets/discord-icon.png" alt="Discord"></a>
+      <a href="https://t.me/mythicmarket"><img src="assets/telegram-icon.png" alt="Telegram"></a>
+    </div>
+    <p>&copy; 2025 Mythic Market. All rights reserved.</p>
   </footer>
 
-  <!-- ========================= -->
-  <!-- DARK MODE TOGGLE SCRIPT -->
-  <!-- ========================= -->
   <script>
-    const root = document.documentElement;
     const themeToggle = document.getElementById('theme-toggle');
-    const saved = localStorage.getItem('theme');
-    if (saved) {
-      root.setAttribute('data-theme', saved);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      root.setAttribute('data-theme', 'dark');
-    }
     themeToggle.addEventListener('click', () => {
-      const current = root.getAttribute('data-theme');
-      const next = (current === 'dark' ? 'light' : 'dark');
-      root.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
+      document.body.toggleAttribute('data-theme');
     });
-  </script>
 
-  <!-- ========================= -->
-  <!-- COUNTDOWN + TABLE SCRIPT -->
-  <!-- ========================= -->
-  <script>
-    // 1) CONFIGURE YOUR TOKENS HERE
     const tokenData = [
-      {
-        name: "ARES",
-        symbol: "ARES",
-        image: "assets/ARES.png",
-        mint: "null",
-        // Launch date in ISO 8601 (UTC):
-        launchDate: "2025-06-06T19:00:00Z"
-      },
-      {
-        name: "ZEUS",
-        symbol: "ZEUS",
-        image: "assets/ZEUS.png",
-        mint: "null",
-        launchDate: "2025-06-13T19:00:00Z"
-      },
-      {
-        name: "THOR",
-        symbol: "THOR",
-        image: "assets/THOR.png",
-        mint: "null",
-        launchDate: "2025-06-20T19:00:00Z"
-      },
-      // Add more tokens similarly...
+      { name: "ZeusCoin", date: "2025-06-05T14:00:00Z" },
+      { name: "PoseidonCoin", date: "2025-06-10T18:00:00Z" },
+      { name: "HadesCoin", date: "2025-06-15T16:00:00Z" },
     ];
 
-    // 2) UTILITY: Format a mint address as "xxxx...xxxx"
-    function truncateMint(mint) {
-      return mint.slice(0, 4) + "..." + mint.slice(-4);
-    }
+    function updateCountdown() {
+      const tokenTable = document.getElementById('token-data');
+      tokenTable.innerHTML = ''; // Clear existing rows
 
-    // 3) Build table rows and start countdowns
-    function renderTokenRows() {
-      const tbody = document.getElementById("token-data");
-      tbody.innerHTML = ""; // clear existing rows
+      tokenData.forEach(token => {
+        const row = document.createElement('tr');
+        const nameCell = document.createElement('td');
+        const dateCell = document.createElement('td');
+        const countdownCell = document.createElement('td');
 
-      tokenData.forEach((token, index) => {
-        // Create row and cells
-        const row = document.createElement("tr");
+        nameCell.textContent = token.name;
+        dateCell.textContent = new Date(token.date).toLocaleString();
+        countdownCell.textContent = "Calculating..."; // Will add countdown logic here
 
-        // Token cell: image + name (symbol)
-        const tokenCell = document.createElement("td");
-        tokenCell.innerHTML = `
-          <img src="${token.image}" alt="${token.symbol}" width="24" height="24" />
-          <strong>${token.name}</strong> (${token.symbol})
-        `;
-        row.appendChild(tokenCell);
-
-        // Launch date (static text)
-        const launchCell = document.createElement("td");
-        // Show human‐readable date/time
-        const launchDateObj = new Date(token.launchDate);
-        launchCell.innerText = launchDateObj.toUTCString();
-        row.appendChild(launchCell);
-
-        // Countdown / Link cell
-        const countdownCell = document.createElement("td");
-        countdownCell.id = "countdown-" + index;
+        row.appendChild(nameCell);
+        row.appendChild(dateCell);
         row.appendChild(countdownCell);
-
-        tbody.appendChild(row);
+        tokenTable.appendChild(row);
       });
     }
 
-    // 4) Countdown update loop
-    function updateCountdowns() {
-      tokenData.forEach((token, index) => {
-        const now = new Date();
-        const launchDate = new Date(token.launchDate);
-        const diff = launchDate - now;
-
-        const countdownCell = document.getElementById("countdown-" + index);
-        if (!countdownCell) return;
-
-        if (diff <= 0) {
-          countdownCell.innerHTML = `<em>Launched</em>`;
-          return;
-        }
-
-        // Calculate days, hours, minutes, seconds
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        countdownCell.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-      });
-    }
-
-    // Run at start
-    renderTokenRows();
-    updateCountdowns();
-    // Update every second
-    setInterval(updateCountdowns, 1000);
-  </script>
-
-  <!-- ========================= -->
-  <!-- SUMMARY COLOR RESET SCRIPT -->
-  <!-- ========================= -->
-  <script>
-    // Reset summary color on blur (when clicking away)
-    document.querySelectorAll('summary').forEach(summary => {
-      summary.addEventListener('blur', () => {
-        summary.style.color = '';
-      });
-
-      // Optional: ensure color resets on click outside
-      summary.addEventListener('click', () => {
-        // Delay blur reset for accessibility (some browsers)
-        setTimeout(() => {
-          if (document.activeElement !== summary) {
-            summary.style.color = '';
-          }
-        }, 100);
-      });
-    });
+    updateCountdown(); // Initial render
   </script>
 </body>
 </html>
