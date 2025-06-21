@@ -710,7 +710,7 @@
     { key: "vulcan", label: "🔥 Vulcan – Roman God of Fire and Forge (Greek Hephaestus Equivalent)" },
     { key: "zephyr", label: "🦅 Zephyr – Greek West Wind God" },
     { key: "change", label: "🌕 Chang’e – Chinese Moon Goddess" },
-    { key: "sunwukong", label: "🐒 Sun Wukong – Chinese Monkey King god" }
+    { key: "sunwukong", label: "🐒 Sun Wukong – Chinese Monkey King" }
   ];
 
   // Utility: generate UUIDv4 for user id
@@ -810,8 +810,8 @@
     const sortedGods = [...gods].sort((a, b) => (votesData[b.key] || 0) - (votesData[a.key] || 0));
 
     // Pagination logic
-    const start = (currentPage - 1) * 10;
-    const end = start + 10;
+    const start = (currentPage - 1) * 20;
+    const end = start + 20;
     const paginated = sortedGods.slice(start, end);
 
     votingRows.innerHTML = '';
