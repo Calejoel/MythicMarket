@@ -282,6 +282,9 @@
       color: black;
       font-weight: bold;
     }
+    .dexscreener-embed { position: relative; width: 100%; padding-bottom: 125%; }
+    @media(min-width:1400px) { .dexscreener-embed { padding-bottom: 65%; } }
+    .dexscreener-embed iframe { position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: 0; }
   </style>
 </head>
 <body>
@@ -374,8 +377,8 @@
             <tr>
               <th class="px-4 py-2 rounded-tl-2xl text-left">Token</th>
               <th class="px-4 py-2 text-left">Launch Date (UTC/GMT)</th>
-              <th class="px-4 py-2 text-left">Chart</th>
               <th class="px-4 py-2 rounded-tr-2xl text-left">Countdown / Link</th>
+              <th class="px-4 py-2 text-left">Chart</th>
             </tr>
           </thead>
           <tbody id="token-data" class="bg-white dark:bg-gray-900">
@@ -446,7 +449,7 @@
       symbol: "ARES",
       image: "assets/ARES.png",
       mint: "HJ8Z8qkLXKS8HLCQEFquTXierjZKLnnkBAn4nTaDBZy1",
-      chartUrl: "https://dexscreener.com/solana/Db8JBMfpNxCykttnyADX4ZyVzAZ6pW4JRD5HS8JQeCTe?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15",
+      chartUrl: "https://dexscreener.com/solana/Db8JBMfpNxCykttnyADX4ZyVzAZ6pW4JRD5HS8JQeCTe?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=1S",
       launchDate: "2025-06-08T19:00:00Z"
     },
     {
@@ -454,7 +457,7 @@
       symbol: "ZEUS",
       image: "assets/ZEUS.png",
       mint: "null",
-      chartUrl: "https://dexscreener.com/solana/EXAMPLEZEUS", // Replace with actual link
+      chartUrl: "https://dexscreener.com/solana/PAIRADDRESS?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=1S", // Replace with actual link
       launchDate: "2025-06-22T19:00:00Z"
     },
     {
@@ -462,7 +465,7 @@
       symbol: "THOR",
       image: "assets/THOR.png",
       mint: "null",
-      chartUrl: "https://dexscreener.com/solana/EXAMPLETHOR", // Replace with actual link
+      chartUrl: "https://dexscreener.com/solana/PAIRADDRESS?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=1&chartType=usd&interval=1S", // Replace with actual link
       launchDate: "2025-06-29T19:00:00Z"
     },
     // Add more tokens similarly...
@@ -527,9 +530,9 @@
       const chartCellFull = document.createElement("td");
       chartCellFull.colSpan = 4; // Adjust based on total columns
       chartCellFull.innerHTML = `
-        <div id="dexscreener-embed" style="position:relative;width:100%;padding-bottom:125%;margin-top:1rem;">
-          <iframe src="${token.chartUrl}" style="position:absolute;width:100%;height:100%;top:0;left:0;border:0;border-radius:8px;"></iframe>
-        </div>
+      <div class="dexscreener-embed" style="margin-top:1rem;">
+      <iframe src="${token.chartUrl}"></iframe><
+      div>
       `;
       chartRow.appendChild(chartCellFull);
 
