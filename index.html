@@ -374,6 +374,7 @@
             <tr>
               <th class="px-4 py-2 rounded-tl-2xl text-left">Token</th>
               <th class="px-4 py-2 text-left">Launch Date (UTC/GMT)</th>
+              <th class="px-4 py-2 text-left">Chart</th>
               <th class="px-4 py-2 rounded-tr-2xl text-left">Countdown / Link</th>
             </tr>
           </thead>
@@ -438,110 +439,139 @@
   <!-- COUNTDOWN + TABLE SCRIPT -->
   <!-- ========================= -->
   <script>
-    // 1) CONFIGURE YOUR TOKENS HERE
-    const tokenData = [
-      {
-        name: "ARES",
-        symbol: "ARES",
-        image: "assets/ARES.png",
-        mint: "HJ8Z8qkLXKS8HLCQEFquTXierjZKLnnkBAn4nTaDBZy1",
-        // Launch date in ISO 8601 (UTC):
-        launchDate: "2025-06-08T19:00:00Z"
-      },
-      {
-        name: "ZEUS",
-        symbol: "ZEUS",
-        image: "assets/ZEUS.png",
-        mint: "null",
-        launchDate: "2025-06-22T19:00:00Z"
-      },
-      {
-        name: "THOR",
-        symbol: "THOR",
-        image: "assets/THOR.png",
-        mint: "null",
-        launchDate: "2025-06-29T19:00:00Z"
-      },
-      // Add more tokens similarly...
-    ];
+  // 1) CONFIGURE YOUR TOKENS HERE
+  const tokenData = [
+    {
+      name: "ARES",
+      symbol: "ARES",
+      image: "assets/ARES.png",
+      mint: "HJ8Z8qkLXKS8HLCQEFquTXierjZKLnnkBAn4nTaDBZy1",
+      chartUrl: "https://dexscreener.com/solana/Db8JBMfpNxCykttnyADX4ZyVzAZ6pW4JRD5HS8JQeCTe?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15",
+      launchDate: "2025-06-08T19:00:00Z"
+    },
+    {
+      name: "ZEUS",
+      symbol: "ZEUS",
+      image: "assets/ZEUS.png",
+      mint: "null",
+      chartUrl: "https://dexscreener.com/solana/EXAMPLEZEUS", // Replace with actual link
+      launchDate: "2025-06-22T19:00:00Z"
+    },
+    {
+      name: "THOR",
+      symbol: "THOR",
+      image: "assets/THOR.png",
+      mint: "null",
+      chartUrl: "https://dexscreener.com/solana/EXAMPLETHOR", // Replace with actual link
+      launchDate: "2025-06-29T19:00:00Z"
+    },
+    // Add more tokens similarly...
+  ];
 
-    // 2) UTILITY: Format a mint address as "xxxx...xxxx"
-    function truncateMint(mint) {
-      return mint.slice(0, 4) + "..." + mint.slice(-4);
-    }
-
-    // 3) Build table rows and start countdowns
-    function renderTokenRows() {
-      const tbody = document.getElementById("token-data");
-      tbody.innerHTML = ""; // clear existing rows
-
-      tokenData.forEach((token, index) => {
-        // Create row and cells
-        const row = document.createElement("tr");
-
-        // Token cell: image + name (symbol)
-        const tokenCell = document.createElement("td");
-        tokenCell.innerHTML = `
-          <img src="${token.image}" alt="${token.symbol}" width="24" height="24" />
-          <strong>${token.name}</strong> (${token.symbol})
-        `;
-        row.appendChild(tokenCell);
-
-        // Launch date (static text)
-        const launchCell = document.createElement("td");
-        // Show human‐readable date/time
-        const launchDateObj = new Date(token.launchDate);
-        launchCell.innerText = launchDateObj.toUTCString();
-        row.appendChild(launchCell);
-
-        // Countdown / Link cell
-        const countdownCell = document.createElement("td");
-        countdownCell.id = "countdown-" + index;
-        row.appendChild(countdownCell);
-
-        tbody.appendChild(row);
-      });
-    }
-
-    // 4) Countdown update loop
-    function updateCountdowns() {
-      tokenData.forEach((token, index) => {
-        const now = new Date();
-        const launchDate = new Date(token.launchDate);
-        const diff = launchDate - now;
-
-        const countdownCell = document.getElementById("countdown-" + index);
-        if (!countdownCell) return;
-        
-        if (diff <= 0) {
-         if (token.mint && token.mint !== "null") {
-    const shortMint = truncateMint(token.mint);
-    countdownCell.innerHTML = `
-    <a href="https://solscan.io/token/${token.mint}" target="_blank">
-      ${shortMint}
-        </a>`;
-  } else {
-    countdownCell.innerHTML = `<em>Launched, CA in Telegram + Discord!</em>`;
+  function truncateMint(mint) {
+    return mint.slice(0, 4) + "..." + mint.slice(-4);
   }
-         return;
-       }
 
-        // Calculate days, hours, minutes, seconds
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
+  function renderTokenRows() {
+    const tbody = document.getElementById("token-data");
+    tbody.innerHTML = "";
 
-        countdownCell.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-      });
-    }
+    tokenData.forEach((token, index) => {
+      // Main Row
+      const row = document.createElement("tr");
 
-    // Run at start
-    renderTokenRows();
-    updateCountdowns();
-    // Update every second
-    setInterval(updateCountdowns, 1000);
-  </script>
+      // Token Cell
+      const tokenCell = document.createElement("td");
+      tokenCell.innerHTML = `
+        <img src="${token.image}" alt="${token.symbol}" width="24" height="24" />
+        <strong>${token.name}</strong> (${token.symbol})
+      `;
+      row.appendChild(tokenCell);
+
+      // Launch Date Cell
+      const launchCell = document.createElement("td");
+      const launchDateObj = new Date(token.launchDate);
+      launchCell.innerText = launchDateObj.toUTCString();
+      row.appendChild(launchCell);
+
+      // Countdown / Link Cell
+      const countdownCell = document.createElement("td");
+      countdownCell.id = "countdown-" + index;
+      row.appendChild(countdownCell);
+
+      // Chart Toggle Cell
+      const chartCell = document.createElement("td");
+      const chartToggleBtn = document.createElement("button");
+      chartToggleBtn.textContent = "Show Chart";
+      chartToggleBtn.className = "vote-btn";
+      chartToggleBtn.onclick = () => {
+        const chartRow = document.getElementById("chart-row-" + index);
+        if (chartRow.style.display === "table-row") {
+          chartRow.style.display = "none";
+          chartToggleBtn.textContent = "Show Chart";
+        } else {
+          chartRow.style.display = "table-row";
+          chartToggleBtn.textContent = "Hide Chart";
+        }
+      };
+      chartCell.appendChild(chartToggleBtn);
+      row.appendChild(chartCell);
+
+      tbody.appendChild(row);
+
+      // Chart Row
+      const chartRow = document.createElement("tr");
+      chartRow.id = "chart-row-" + index;
+      chartRow.style.display = "none";
+
+      const chartCellFull = document.createElement("td");
+      chartCellFull.colSpan = 4; // Adjust based on total columns
+      chartCellFull.innerHTML = `
+        <div id="dexscreener-embed" style="position:relative;width:100%;padding-bottom:125%;margin-top:1rem;">
+          <iframe src="${token.chartUrl}" style="position:absolute;width:100%;height:100%;top:0;left:0;border:0;border-radius:8px;"></iframe>
+        </div>
+      `;
+      chartRow.appendChild(chartCellFull);
+
+      tbody.appendChild(chartRow);
+    });
+  }
+
+  function updateCountdowns() {
+    tokenData.forEach((token, index) => {
+      const now = new Date();
+      const launchDate = new Date(token.launchDate);
+      const diff = launchDate - now;
+
+      const countdownCell = document.getElementById("countdown-" + index);
+      if (!countdownCell) return;
+
+      if (diff <= 0) {
+        if (token.mint && token.mint !== "null") {
+          const shortMint = truncateMint(token.mint);
+          countdownCell.innerHTML = `
+            <a href="https://solscan.io/token/${token.mint}" target="_blank" class="text-blue-500 hover:underline">
+              ${shortMint}
+            </a>`;
+        } else {
+          countdownCell.innerHTML = `<em>Launched, CA in Telegram + Discord!</em>`;
+        }
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownCell.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    });
+  }
+
+  renderTokenRows();
+  updateCountdowns();
+  setInterval(updateCountdowns, 1000);
+ </script>
 
   <!-- ========================= -->
   <!-- SUMMARY COLOR RESET SCRIPT -->
