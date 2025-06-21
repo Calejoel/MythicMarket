@@ -277,6 +277,11 @@
     .pagination button:hover {
       background: #0066cc;
     }
+    .pagination button.current-page {
+      background: #00c2ff;
+      color: black;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -827,9 +832,12 @@
       btn.className = 'vote-btn';
       btn.disabled = (i === currentPage);
       btn.onclick = () => {
-        currentPage = i;
-        renderTable();
+  currentPage = i;
+  renderTable();
       };
+      if (i === currentPage) {
+  btn.classList.add('current-page');
+}
       pagination.appendChild(btn);
     }
   }
