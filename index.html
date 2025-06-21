@@ -383,7 +383,7 @@
     <details id="vote-section" open>
       <summary class="section-title">Vote for the Next God</summary>
       <div class="section-content">
-        <p>Select from a community-curated list of mythic gods. You can vote once per god, once per week.</p>
+        <p>Select from a community-curated list of Mythic Gods. up to 10 UNIQUE VOTES EVERY 7 DAYS!</p>
         <table id="voting-table">
           <thead>
             <tr>
@@ -581,166 +581,258 @@
     });
   });
 </script>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-    import { getDatabase, ref, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+  import { getDatabase, ref, runTransaction, onValue, get, child, set } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyDSyissVOKDN-ZYYC4a0GclaxTWzjaMctU",
-      authDomain: "mythicmarketvoting.firebaseapp.com",
-      databaseURL: "https://mythicmarketvoting-default-rtdb.europe-west1.firebasedatabase.app/",
-      projectId: "mythicmarketvoting",
-      storageBucket: "mythicmarketvoting.appspot.com",
-      messagingSenderId: "53404709260",
-      appId: "1:53404709260:web:a5946515cda8157dd3e6a9",
-      measurementId: "G-PXH24BW4NZ"
-    };
+  const firebaseConfig = {
+    apiKey: "AIzaSyDSyissVOKDN-ZYYC4a0GclaxTWzjaMctU",
+    authDomain: "mythicmarketvoting.firebaseapp.com",
+    databaseURL: "https://mythicmarketvoting-default-rtdb.europe-west1.firebasedatabase.app/",
+    projectId: "mythicmarketvoting",
+    storageBucket: "mythicmarketvoting.appspot.com",
+    messagingSenderId: "53404709260",
+    appId: "1:53404709260:web:a5946515cda8157dd3e6a9",
+    measurementId: "G-PXH24BW4NZ"
+  };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
 
-    const gods = [
-  { key: 'zeus', label: '⚡ Zeus – Greek God of the Sky and Thunder' },
-  { key: 'poseidon', label: '🌊 Poseidon – Greek God of the Sea' },
-  { key: 'ares', label: '🔥 Ares – Greek God of War' },
-  { key: 'hades', label: '🌑 Hades – Greek God of the Underworld' },
-  { key: 'athena', label: '🦉 Athena – Greek Goddess of Wisdom and War Strategy' },
-  { key: 'aphrodite', label: '💘 Aphrodite – Greek Goddess of Love and Beauty' },
-  { key: 'apollo', label: '🎯 Apollo – Greek God of the Sun, Music, and Prophecy' },
-  { key: 'artemis', label: '🏹 Artemis – Greek Goddess of the Hunt and Moon' },
-  { key: 'demeter', label: '🌾 Demeter – Greek Goddess of Agriculture and Harvest' },
-  { key: 'persephone', label: '♻️ Persephone – Greek Goddess of Spring and Queen of the Underworld' },
-  { key: 'hecate', label: '♠️ Hecate – Greek Goddess of Magic, Witchcraft, and the Night' },
-  { key: 'dionysus', label: '🎭 Dionysus – Greek God of Wine, Festivity, and Madness' },
-  { key: 'hermes', label: '🦅 Hermes – Greek God of Trade, Thieves, and Messenger of the Gods' },
-  { key: 'achilles', label: '🗡️ Achilles – Greek Hero, Greatest Warrior of the Trojan War' },
-  { key: 'thanatos', label: '🕊️ Thanatos – Greek God of Death' },
-  { key: 'hestia', label: '⚡ Hestia – Greek Goddess of Hearth and Home' },
-  { key: 'panacea', label: '🌿 Panacea – Greek Goddess of Healing and Remedies' },
-  { key: 'heracles', label: '🦁 Heracles – Greek Hero Known for His Strength and the Twelve Labors' },
-  { key: 'helios', label: '🌞 Helios – Greek Sun God before Apollo' },
-  { key: 'selene', label: '🌙 Selene – Greek Goddess of the Moon' },
-  { key: 'odin', label: '🦅 Odin – Norse Allfather God of Wisdom, War, and Death' },
-  { key: 'thor', label: '❄️ Thor – Norse God of Thunder and Strength' },
-  { key: 'loki', label: '🧊 Loki – Norse God of Mischief and Trickery' },
-  { key: 'heimdall', label: '🛡️ Heimdall – Norse Guardian of the Bifrost Bridge' },
-  { key: 'freya', label: '🪶 Freya – Norse Goddess of Love, Beauty, and Fertility' },
-  { key: 'fenrir', label: '🐺 Fenrir – Norse Giant Wolf, Son of Loki' },
-  { key: 'jormungandr', label: '🐍 Jörmungandr – Norse World Serpent' },
-  { key: 'baldr', label: '🦁 Baldr – Norse God of Beauty, Love, and Happiness' },
-  { key: 'njord', label: '🌪️ Njord – Norse God of the Sea and Winds' },
-  { key: 'skoll', label: '🐺 Sköll – Norse Wolf Chasing the Sun' },
-  { key: 'nidhogg', label: '🐍 Nidhogg – Norse Dragon Serpent Gnawing at the World Tree' },
-  { key: 'ra', label: '🌞 Ra – Egyptian Sun God' },
-  { key: 'set', label: '🦂 Set – Egyptian God of Chaos, Desert, Storms, and War' },
-  { key: 'horus', label: '🦅 Horus – Egyptian God of the Sky and Kingship' },
-  { key: 'anubis', label: '🌬️ Anubis – Egyptian God of Mummification and Afterlife' },
-  { key: 'isis', label: '🪷 Isis – Egyptian Goddess of Magic, Marriage, Healing, and Protection' },
-  { key: 'osiris', label: '🌾 Osiris – Egyptian God of the Dead and Resurrection' },
-  { key: 'maat', label: '⚖️ Ma’at – Egyptian Goddess of Truth, Justice, and Order' },
-  { key: 'bastet', label: '🐅 Bastet – Egyptian Goddess of Home, Fertility, and Cats' },
-  { key: 'wadjet', label: '🐍 Wadjet – Egyptian Cobra Goddess and Protector of Lower Egypt' },
-  { key: 'amaterasu', label: '🌟 Amaterasu – Japanese Sun Goddess' },
-  { key: 'izanami', label: '🌸 Izanami – Japanese Goddess of Creation and Death' },
-  { key: 'pele', label: '🔥 Pele – Hawaiian Goddess of Volcanoes and Fire' },
-  { key: 'saraswati', label: '🦚 Saraswati – Hindu Goddess of Knowledge, Music, Art, Wisdom, and Learning' },
-  { key: 'ganesha', label: '🦏 Ganesha – Hindu God of Wisdom, Success, and Remover of Obstacles' },
-  { key: 'indra', label: '⚡ Indra – Hindu God of Thunder, Rain, and War' },
-  { key: 'agni', label: '🔥 Agni – Hindu God of Fire and Sacrifice' },
-  { key: 'kartikeya', label: '🦚 Kartikeya – Hindu God of War' },
-  { key: 'naga', label: '🐉 Naga – Hindu/Asian Mythical Serpent' },
-  { key: 'merlin', label: '🧙 Merlin – Legendary Wizard from Arthurian Legend' },
-  { key: 'kingarthur', label: '👑 King Arthur – Legendary British Leader and Knight of the Round Table' },
-  { key: 'fafnir', label: '🐉 Fafnir – Norse Dragon, Formerly a Dwarf' },
-  { key: 'lilith', label: '🦇 Lilith – Figure from Jewish Mythology, First Wife of Adam and Demoness' },
-  { key: 'kukulkan', label: '🐍 Kukulkan – Mesoamerican Feathered Serpent Deity' },
-  { key: 'pegasus', label: '🐴 Pegasus – Winged Divine Horse in Greek Mythology' },
-  { key: 'garuda', label: '🦅 Garuda – Hindu and Buddhist Divine Bird and Vehicle of Vishnu' },
-  { key: 'morrigan', label: '🐦 Morrigan – Celtic Goddess of War, Fate, and Death' },
-  { key: 'zephyrus', label: '🌪️ Zephyrus – Greek God of the West Wind' },
-  { key: 'babayaga', label: '🧙‍♀️ Baba Yaga – Slavic Mythical Witch' },
-  { key: 'nuwa', label: '🐉 Nüwa – Chinese Goddess Who Created Humanity' },
-  { key: 'guanyu', label: '⚔️ Guan Yu – Chinese God of War and Loyalty' },
-  { key: 'quirinus', label: '🦅 Quirinus – Roman God of War' },
-  { key: 'hecatealt', label: '🌟 Hecate – Greek Goddess of Magic and Crossroads' },
-  { key: 'maui', label: '🗡️ Maui – Polynesian Demigod and Trickster' },
-  { key: 'tlaloc', label: '🌊 Tlaloc – Aztec God of Rain and Fertility' },
-  { key: 'epona', label: '🦁 Epona – Celtic Goddess of Horses and Fertility' },
-  { key: 'kuanyin', label: '🌸 Kuan Yin – East Asian Goddess of Mercy and Compassion' },
-  { key: 'minerva', label: '🦉 Minerva – Roman Goddess of Wisdom (Greek Athena Equivalent)' },
-  { key: 'vulcan', label: '🔥 Vulcan – Roman God of Fire and Forge (Greek Hephaestus Equivalent)' },
-  { key: 'zephyr', label: '🦅 Zephyr – Greek West Wind God' },
-  { key: 'change', label: '🌕 Chang’e – Chinese Moon Goddess' },
-  { key: 'sunwukong', label: '🐒 Sun Wukong – Chinese Monkey King' }
-];
-    let votesData = {};
-    let currentPage = 1;
-    const rowsPerPage = 10;
+  // Full gods list with keys and labels
+  const gods = [
+    { key: "zeus", label: "⚡ Zeus – Greek God of the Sky and Thunder" },
+    { key: "poseidon", label: "🌊 Poseidon – Greek God of the Sea" },
+    { key: "ares", label: "🔥 Ares – Greek God of War" },
+    { key: "hades", label: "🌑 Hades – Greek God of the Underworld" },
+    { key: "athena", label: "🦉 Athena – Greek Goddess of Wisdom and War Strategy" },
+    { key: "aphrodite", label: "💘 Aphrodite – Greek Goddess of Love and Beauty" },
+    { key: "apollo", label: "🎯 Apollo – Greek God of the Sun, Music, and Prophecy" },
+    { key: "artemis", label: "🏹 Artemis – Greek Goddess of the Hunt and Moon" },
+    { key: "demeter", label: "🌾 Demeter – Greek Goddess of Agriculture and Harvest" },
+    { key: "persephone", label: "♻️ Persephone – Greek Goddess of Spring and Queen of the Underworld" },
+    { key: "hecate", label: "♠️ Hecate – Greek Goddess of Magic, Witchcraft, and the Night" },
+    { key: "dionysus", label: "🎭 Dionysus – Greek God of Wine, Festivity, and Madness" },
+    { key: "hermes", label: "🦅 Hermes – Greek God of Trade, Thieves, and Messenger of the Gods" },
+    { key: "achilles", label: "🗡️ Achilles – Greek Hero, Greatest Warrior of the Trojan War" },
+    { key: "thanatos", label: "🕊️ Thanatos – Greek God of Death" },
+    { key: "hestia", label: "⚡ Hestia – Greek Goddess of Hearth and Home" },
+    { key: "panacea", label: "🌿 Panacea – Greek Goddess of Healing and Remedies" },
+    { key: "heracles", label: "🦁 Heracles – Greek Hero Known for His Strength and the Twelve Labors" },
+    { key: "helios", label: "🌞 Helios – Greek Sun God before Apollo" },
+    { key: "selene", label: "🌙 Selene – Greek Goddess of the Moon" },
+    { key: "odin", label: "🦅 Odin – Norse Allfather God of Wisdom, War, and Death" },
+    { key: "thor", label: "❄️ Thor – Norse God of Thunder and Strength" },
+    { key: "loki", label: "🧊 Loki – Norse God of Mischief and Trickery" },
+    { key: "heimdall", label: "🛡️ Heimdall – Norse Guardian of the Bifrost Bridge" },
+    { key: "freya", label: "🪶 Freya – Norse Goddess of Love, Beauty, and Fertility" },
+    { key: "fenrir", label: "🐺 Fenrir – Norse Giant Wolf, Son of Loki" },
+    { key: "jormungandr", label: "🐍 Jörmungandr – Norse World Serpent" },
+    { key: "baldr", label: "🦁 Baldr – Norse God of Beauty, Love, and Happiness" },
+    { key: "njord", label: "🌪️ Njord – Norse God of the Sea and Winds" },
+    { key: "skoll", label: "🐺 Sköll – Norse Wolf Chasing the Sun" },
+    { key: "nidhogg", label: "🐍 Nidhogg – Norse Dragon Serpent Gnawing at the World Tree" },
+    { key: "ra", label: "🌞 Ra – Egyptian Sun God" },
+    { key: "set", label: "🦂 Set – Egyptian God of Chaos, Desert, Storms, and War" },
+    { key: "horus", label: "🦅 Horus – Egyptian God of the Sky and Kingship" },
+    { key: "anubis", label: "🌬️ Anubis – Egyptian God of Mummification and Afterlife" },
+    { key: "isis", label: "🪷 Isis – Egyptian Goddess of Magic, Marriage, Healing, and Protection" },
+    { key: "osiris", label: "🌾 Osiris – Egyptian God of the Dead and Resurrection" },
+    { key: "maat", label: "⚖️ Ma’at – Egyptian Goddess of Truth, Justice, and Order" },
+    { key: "bastet", label: "🐅 Bastet – Egyptian Goddess of Home, Fertility, and Cats" },
+    { key: "wadjet", label: "🐍 Wadjet – Egyptian Cobra Goddess and Protector of Lower Egypt" },
+    { key: "amaterasu", label: "🌟 Amaterasu – Japanese Sun Goddess" },
+    { key: "izanami", label: "🌸 Izanami – Japanese Goddess of Creation and Death" },
+    { key: "pele", label: "🔥 Pele – Hawaiian Goddess of Volcanoes and Fire" },
+    { key: "saraswati", label: "🦚 Saraswati – Hindu Goddess of Knowledge, Music, Art, Wisdom, and Learning" },
+    { key: "ganesha", label: "🦏 Ganesha – Hindu God of Wisdom, Success, and Remover of Obstacles" },
+    { key: "indra", label: "⚡ Indra – Hindu God of Thunder, Rain, and War" },
+    { key: "agni", label: "🔥 Agni – Hindu God of Fire and Sacrifice" },
+    { key: "kartikeya", label: "🦚 Kartikeya – Hindu God of War" },
+    { key: "naga", label: "🐉 Naga – Hindu/Asian Mythical Serpent" },
+    { key: "merlin", label: "🧙 Merlin – Legendary Wizard from Arthurian Legend" },
+    { key: "kingarthur", label: "👑 King Arthur – Legendary British Leader and Knight of the Round Table" },
+    { key: "fafnir", label: "🐉 Fafnir – Norse Dragon, Formerly a Dwarf" },
+    { key: "lilith", label: "🦇 Lilith – Figure from Jewish Mythology, First Wife of Adam and Demoness" },
+    { key: "kukulkan", label: "🐍 Kukulkan – Mesoamerican Feathered Serpent Deity" },
+    { key: "pegasus", label: "🐴 Pegasus – Winged Divine Horse in Greek Mythology" },
+    { key: "garuda", label: "🦅 Garuda – Hindu and Buddhist Divine Bird and Vehicle of Vishnu" },
+    { key: "morrigan", label: "🐦 Morrigan – Celtic Goddess of War, Fate, and Death" },
+    { key: "zephyrus", label: "🌪️ Zephyrus – Greek God of the West Wind" },
+    { key: "babayaga", label: "🧙‍♀️ Baba Yaga – Slavic Mythical Witch" },
+    { key: "nuwa", label: "🐉 Nüwa – Chinese Goddess Who Created Humanity" },
+    { key: "guanyu", label: "⚔️ Guan Yu – Chinese God of War and Loyalty" },
+    { key: "quirinus", label: "🦅 Quirinus – Roman God of War" },
+    { key: "hecate2", label: "🌟 Hecate – Greek Goddess of Magic and Crossroads" },
+    { key: "maui", label: "🗡️ Maui – Polynesian Demigod and Trickster" },
+    { key: "tlaloc", label: "🌊 Tlaloc – Aztec God of Rain and Fertility" },
+    { key: "epona", label: "🦁 Epona – Celtic Goddess of Horses and Fertility" },
+    { key: "kuanyin", label: "🌸 Kuan Yin – East Asian Goddess of Mercy and Compassion" },
+    { key: "minerva", label: "🦉 Minerva – Roman Goddess of Wisdom (Greek Athena Equivalent)" },
+    { key: "vulcan", label: "🔥 Vulcan – Roman God of Fire and Forge (Greek Hephaestus Equivalent)" },
+    { key: "zephyr", label: "🦅 Zephyr – Greek West Wind God" },
+    { key: "change", label: "🌕 Chang’e – Chinese Moon Goddess" },
+    { key: "sunwukong", label: "🐒 Sun Wukong – Chinese Monkey King god" }
+  ];
 
-    const votingRows = document.getElementById('voting-rows');
-    const pagination = document.getElementById('pagination');
+  // Utility: generate UUIDv4 for user id
+  function generateUUID() {
+    // https://stackoverflow.com/a/2117523/355230
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = Math.random() * 16 | 0,
+            v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
 
-    gods.forEach(god => {
-      const voteRef = ref(db, 'votes/' + god.key);
-      onValue(voteRef, (snapshot) => {
-        votesData[god.key] = snapshot.val() || 0;
-        renderTable();
-      });
+  // Get or create userId in localStorage
+  let userId = localStorage.getItem('mythicmarket-userid');
+  if (!userId) {
+    userId = generateUUID();
+    localStorage.setItem('mythicmarket-userid', userId);
+  }
+
+  const votingRows = document.getElementById('voting-rows');
+  const pagination = document.getElementById('pagination');
+  const maxVotesPerWeek = 10;
+  const oneWeekMs = 7 * 24 * 60 * 60 * 1000;
+
+  let votesData = {};
+  let currentPage = 1;
+  let userVotesThisWeek = {};
+
+  // Load total votes for all gods & user votes for this user
+  gods.forEach(god => {
+    const voteRef = ref(db, 'votes/' + god.key + '/count');
+    onValue(voteRef, (snapshot) => {
+      votesData[god.key] = snapshot.val() || 0;
+      renderTable();
+    });
+  });
+
+  // Load user votes data for the current user
+  async function loadUserVotes() {
+    const userVotesRef = ref(db, 'userVotes/' + userId);
+    const snapshot = await get(userVotesRef);
+    const data = snapshot.val() || {};
+    const now = Date.now();
+
+    // Filter votes in last 7 days
+    userVotesThisWeek = {};
+    Object.entries(data).forEach(([godKey, timestamp]) => {
+      if (now - timestamp < oneWeekMs) {
+        userVotesThisWeek[godKey] = timestamp;
+      }
+    });
+    renderTable();
+  }
+
+  loadUserVotes();
+
+  async function vote(godKey) {
+    const now = Date.now();
+
+    // Reload user votes fresh to avoid stale data (optional for better accuracy)
+    await loadUserVotes();
+
+    // Check if user already voted for this god in last 7 days
+    if (userVotesThisWeek[godKey]) {
+      alert(`You have already voted for ${getGodLabel(godKey)} this week.`);
+      return;
+    }
+
+    // Check if user reached max votes for the week
+    if (Object.keys(userVotesThisWeek).length >= maxVotesPerWeek) {
+      alert(`You have reached the max of ${maxVotesPerWeek} votes this week.`);
+      return;
+    }
+
+    // 1) Increment total votes atomically
+    const voteCountRef = ref(db, 'votes/' + godKey + '/count');
+    await runTransaction(voteCountRef, (current) => (current || 0) + 1);
+
+    // 2) Add this vote to user's votes with timestamp
+    const userVoteRef = ref(db, `userVotes/${userId}/${godKey}`);
+    await set(userVoteRef, now);
+
+    alert(`Thanks for voting for ${getGodLabel(godKey)}! You have ${maxVotesPerWeek - Object.keys(userVotesThisWeek).length - 1} votes left this week.`);
+
+    // Reload user votes and update UI
+    await loadUserVotes();
+  }
+
+  function getGodLabel(key) {
+    const god = gods.find(g => g.key === key);
+    return god ? god.label : key;
+  }
+
+  // Render the voting table
+  function renderTable() {
+    // Sort gods descending by total votes
+    const sortedGods = [...gods].sort((a, b) => (votesData[b.key] || 0) - (votesData[a.key] || 0));
+
+    // Pagination logic
+    const start = (currentPage - 1) * 10;
+    const end = start + 10;
+    const paginated = sortedGods.slice(start, end);
+
+    votingRows.innerHTML = '';
+
+    paginated.forEach(god => {
+      const row = document.createElement('tr');
+
+      const nameCell = document.createElement('td');
+      nameCell.textContent = god.label;
+      row.appendChild(nameCell);
+
+      const voteCell = document.createElement('td');
+      voteCell.textContent = votesData[god.key] || 0;
+      row.appendChild(voteCell);
+
+      const actionCell = document.createElement('td');
+      const btn = document.createElement('button');
+      btn.textContent = userVotesThisWeek[god.key] ? "Voted" : "Vote";
+      btn.disabled = !!userVotesThisWeek[god.key];
+      btn.className = 'vote-btn';
+      btn.onclick = () => vote(god.key);
+      actionCell.appendChild(btn);
+      row.appendChild(actionCell);
+
+      votingRows.appendChild(row);
     });
 
-    function vote(godKey) {
-      const voteRef = ref(db, 'votes/' + godKey);
-      runTransaction(voteRef, (currentVotes) => {
-        return (currentVotes || 0) + 1;
-      });
+    renderPagination(sortedGods.length);
+
+    // Show votes left info below the table
+    let votesLeft = maxVotesPerWeek - Object.keys(userVotesThisWeek).length;
+    votesLeft = votesLeft < 0 ? 0 : votesLeft;
+    const infoId = 'votes-left-info';
+    let info = document.getElementById(infoId);
+    if (!info) {
+      info = document.createElement('p');
+      info.id = infoId;
+      info.style.marginTop = '1rem';
+      votingRows.parentElement.appendChild(info);
     }
+    info.textContent = `You have ${votesLeft} vote${votesLeft !== 1 ? 's' : ''} left this week.`;
+  }
 
-    function renderTable() {
-      const sortedGods = gods.sort((a, b) => (votesData[b.key] || 0) - (votesData[a.key] || 0));
-      const start = (currentPage - 1) * rowsPerPage;
-      const end = start + rowsPerPage;
-      const paginatedGods = sortedGods.slice(start, end);
-
-      votingRows.innerHTML = '';
-      paginatedGods.forEach(god => {
-        const row = document.createElement('tr');
-
-        const nameCell = document.createElement('td');
-        nameCell.textContent = god.label;
-        row.appendChild(nameCell);
-
-        const voteCell = document.createElement('td');
-        voteCell.textContent = votesData[god.key] || 0;
-        row.appendChild(voteCell);
-
-        const actionCell = document.createElement('td');
-        const btn = document.createElement('button');
-        btn.textContent = 'Vote';
-        btn.className = 'vote-btn';
-        btn.onclick = () => vote(god.key);
-        actionCell.appendChild(btn);
-        row.appendChild(actionCell);
-
-        votingRows.appendChild(row);
-      });
-
-      renderPagination(sortedGods.length);
+  // Pagination buttons render
+  function renderPagination(total) {
+    const totalPages = Math.ceil(total / 10);
+    pagination.innerHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      btn.className = 'vote-btn';
+      btn.disabled = (i === currentPage);
+      btn.onclick = () => {
+        currentPage = i;
+        renderTable();
+      };
+      pagination.appendChild(btn);
     }
-
-    function renderPagination(totalRows) {
-      const totalPages = Math.ceil(totalRows / rowsPerPage);
-      pagination.innerHTML = '';
-
-      for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement('button');
-        btn.textContent = i;
-        btn.onclick = () => {
-          currentPage = i;
-          renderTable();
-        };
-        pagination.appendChild(btn);
-      }
-    }
-  </script>
+  }
+</script>
 </body>
 </html>
