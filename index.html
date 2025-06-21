@@ -236,6 +236,47 @@
     .spaced-paragraphs p {
        margin-bottom: 1.5rem;
      }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background: #005fa3;
+      color: white;
+    }
+    button.vote-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background: #004080;
+      color: white;
+    }
+    button.vote-btn:hover {
+      background: #0066cc;
+    }
+    .pagination {
+      margin-top: 1rem;
+      text-align: center;
+    }
+    .pagination button {
+      margin: 0 0.25rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: #004080;
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .pagination button:hover {
+      background: #0066cc;
+    }
   </style>
 </head>
 <body>
@@ -342,31 +383,18 @@
     <details id="vote-section" open>
       <summary class="section-title">Vote for the Next God</summary>
       <div class="section-content">
-        <p>
-          Select from a community-curated list of mythic gods. One of top voted gods will be the next micro meme coin collectible launched on Mythic Market! You get 10 votes every week. <br><br>
-           <strong>How to Vote</strong>
-          <div style="padding: 0.5rem 1rem;">
-            <ul>
-              <li>Scroll the embedded list below.</li>
-              <li>Select up to 10 gods you want to see launched next.</li>
-              <li>Click <strong>Vote</strong> to submit your picks.</li>
-            </ul>
-        </p>
-
-        <!-- Scrollable embed container with fixed inner height -->
-        <div style="height: 600px; overflow: hidden; border: 2px solid #ccc; border-radius: 8px; margin-top: 1rem;">
-          <iframe src="https://strawpoll.com/embed/GeZARamWbyV" 
-                  style="width: 100%; height: 100%; border: none; display: block; border-radius: 8px; overflow-y: auto;">
-          </iframe>
-        </div>
-
-        <!-- Results Button with hover effect -->
-        <div style="text-align: center; margin-top: 1rem;">
-          <a href="https://strawpoll.com/GeZARamWbyV/results" target="_blank" 
-             class="view-results-button">
-            View Live Results
-          </a>
-        </div>
+        <p>Select from a community-curated list of mythic gods. You can vote once per god, once per week.</p>
+        <table id="voting-table">
+          <thead>
+            <tr>
+              <th>God</th>
+              <th>Votes</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="voting-rows"></tbody>
+        </table>
+        <div class="pagination" id="pagination"></div>
       </div>
     </details>
   </main>
@@ -553,5 +581,166 @@
     });
   });
 </script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getDatabase, ref, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDSyissVOKDN-ZYYC4a0GclaxTWzjaMctU",
+      authDomain: "mythicmarketvoting.firebaseapp.com",
+      databaseURL: "https://mythicmarketvoting-default-rtdb.europe-west1.firebasedatabase.app/",
+      projectId: "mythicmarketvoting",
+      storageBucket: "mythicmarketvoting.appspot.com",
+      messagingSenderId: "53404709260",
+      appId: "1:53404709260:web:a5946515cda8157dd3e6a9",
+      measurementId: "G-PXH24BW4NZ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const gods = [
+  { key: 'zeus', label: '⚡ Zeus – Greek God of the Sky and Thunder' },
+  { key: 'poseidon', label: '🌊 Poseidon – Greek God of the Sea' },
+  { key: 'ares', label: '🔥 Ares – Greek God of War' },
+  { key: 'hades', label: '🌑 Hades – Greek God of the Underworld' },
+  { key: 'athena', label: '🦉 Athena – Greek Goddess of Wisdom and War Strategy' },
+  { key: 'aphrodite', label: '💘 Aphrodite – Greek Goddess of Love and Beauty' },
+  { key: 'apollo', label: '🎯 Apollo – Greek God of the Sun, Music, and Prophecy' },
+  { key: 'artemis', label: '🏹 Artemis – Greek Goddess of the Hunt and Moon' },
+  { key: 'demeter', label: '🌾 Demeter – Greek Goddess of Agriculture and Harvest' },
+  { key: 'persephone', label: '♻️ Persephone – Greek Goddess of Spring and Queen of the Underworld' },
+  { key: 'hecate', label: '♠️ Hecate – Greek Goddess of Magic, Witchcraft, and the Night' },
+  { key: 'dionysus', label: '🎭 Dionysus – Greek God of Wine, Festivity, and Madness' },
+  { key: 'hermes', label: '🦅 Hermes – Greek God of Trade, Thieves, and Messenger of the Gods' },
+  { key: 'achilles', label: '🗡️ Achilles – Greek Hero, Greatest Warrior of the Trojan War' },
+  { key: 'thanatos', label: '🕊️ Thanatos – Greek God of Death' },
+  { key: 'hestia', label: '⚡ Hestia – Greek Goddess of Hearth and Home' },
+  { key: 'panacea', label: '🌿 Panacea – Greek Goddess of Healing and Remedies' },
+  { key: 'heracles', label: '🦁 Heracles – Greek Hero Known for His Strength and the Twelve Labors' },
+  { key: 'helios', label: '🌞 Helios – Greek Sun God before Apollo' },
+  { key: 'selene', label: '🌙 Selene – Greek Goddess of the Moon' },
+  { key: 'odin', label: '🦅 Odin – Norse Allfather God of Wisdom, War, and Death' },
+  { key: 'thor', label: '❄️ Thor – Norse God of Thunder and Strength' },
+  { key: 'loki', label: '🧊 Loki – Norse God of Mischief and Trickery' },
+  { key: 'heimdall', label: '🛡️ Heimdall – Norse Guardian of the Bifrost Bridge' },
+  { key: 'freya', label: '🪶 Freya – Norse Goddess of Love, Beauty, and Fertility' },
+  { key: 'fenrir', label: '🐺 Fenrir – Norse Giant Wolf, Son of Loki' },
+  { key: 'jormungandr', label: '🐍 Jörmungandr – Norse World Serpent' },
+  { key: 'baldr', label: '🦁 Baldr – Norse God of Beauty, Love, and Happiness' },
+  { key: 'njord', label: '🌪️ Njord – Norse God of the Sea and Winds' },
+  { key: 'skoll', label: '🐺 Sköll – Norse Wolf Chasing the Sun' },
+  { key: 'nidhogg', label: '🐍 Nidhogg – Norse Dragon Serpent Gnawing at the World Tree' },
+  { key: 'ra', label: '🌞 Ra – Egyptian Sun God' },
+  { key: 'set', label: '🦂 Set – Egyptian God of Chaos, Desert, Storms, and War' },
+  { key: 'horus', label: '🦅 Horus – Egyptian God of the Sky and Kingship' },
+  { key: 'anubis', label: '🌬️ Anubis – Egyptian God of Mummification and Afterlife' },
+  { key: 'isis', label: '🪷 Isis – Egyptian Goddess of Magic, Marriage, Healing, and Protection' },
+  { key: 'osiris', label: '🌾 Osiris – Egyptian God of the Dead and Resurrection' },
+  { key: 'maat', label: '⚖️ Ma’at – Egyptian Goddess of Truth, Justice, and Order' },
+  { key: 'bastet', label: '🐅 Bastet – Egyptian Goddess of Home, Fertility, and Cats' },
+  { key: 'wadjet', label: '🐍 Wadjet – Egyptian Cobra Goddess and Protector of Lower Egypt' },
+  { key: 'amaterasu', label: '🌟 Amaterasu – Japanese Sun Goddess' },
+  { key: 'izanami', label: '🌸 Izanami – Japanese Goddess of Creation and Death' },
+  { key: 'pele', label: '🔥 Pele – Hawaiian Goddess of Volcanoes and Fire' },
+  { key: 'saraswati', label: '🦚 Saraswati – Hindu Goddess of Knowledge, Music, Art, Wisdom, and Learning' },
+  { key: 'ganesha', label: '🦏 Ganesha – Hindu God of Wisdom, Success, and Remover of Obstacles' },
+  { key: 'indra', label: '⚡ Indra – Hindu God of Thunder, Rain, and War' },
+  { key: 'agni', label: '🔥 Agni – Hindu God of Fire and Sacrifice' },
+  { key: 'kartikeya', label: '🦚 Kartikeya – Hindu God of War' },
+  { key: 'naga', label: '🐉 Naga – Hindu/Asian Mythical Serpent' },
+  { key: 'merlin', label: '🧙 Merlin – Legendary Wizard from Arthurian Legend' },
+  { key: 'kingarthur', label: '👑 King Arthur – Legendary British Leader and Knight of the Round Table' },
+  { key: 'fafnir', label: '🐉 Fafnir – Norse Dragon, Formerly a Dwarf' },
+  { key: 'lilith', label: '🦇 Lilith – Figure from Jewish Mythology, First Wife of Adam and Demoness' },
+  { key: 'kukulkan', label: '🐍 Kukulkan – Mesoamerican Feathered Serpent Deity' },
+  { key: 'pegasus', label: '🐴 Pegasus – Winged Divine Horse in Greek Mythology' },
+  { key: 'garuda', label: '🦅 Garuda – Hindu and Buddhist Divine Bird and Vehicle of Vishnu' },
+  { key: 'morrigan', label: '🐦 Morrigan – Celtic Goddess of War, Fate, and Death' },
+  { key: 'zephyrus', label: '🌪️ Zephyrus – Greek God of the West Wind' },
+  { key: 'babayaga', label: '🧙‍♀️ Baba Yaga – Slavic Mythical Witch' },
+  { key: 'nuwa', label: '🐉 Nüwa – Chinese Goddess Who Created Humanity' },
+  { key: 'guanyu', label: '⚔️ Guan Yu – Chinese God of War and Loyalty' },
+  { key: 'quirinus', label: '🦅 Quirinus – Roman God of War' },
+  { key: 'hecatealt', label: '🌟 Hecate – Greek Goddess of Magic and Crossroads' },
+  { key: 'maui', label: '🗡️ Maui – Polynesian Demigod and Trickster' },
+  { key: 'tlaloc', label: '🌊 Tlaloc – Aztec God of Rain and Fertility' },
+  { key: 'epona', label: '🦁 Epona – Celtic Goddess of Horses and Fertility' },
+  { key: 'kuanyin', label: '🌸 Kuan Yin – East Asian Goddess of Mercy and Compassion' },
+  { key: 'minerva', label: '🦉 Minerva – Roman Goddess of Wisdom (Greek Athena Equivalent)' },
+  { key: 'vulcan', label: '🔥 Vulcan – Roman God of Fire and Forge (Greek Hephaestus Equivalent)' },
+  { key: 'zephyr', label: '🦅 Zephyr – Greek West Wind God' },
+  { key: 'change', label: '🌕 Chang’e – Chinese Moon Goddess' },
+  { key: 'sunwukong', label: '🐒 Sun Wukong – Chinese Monkey King' }
+];
+    let votesData = {};
+    let currentPage = 1;
+    const rowsPerPage = 10;
+
+    const votingRows = document.getElementById('voting-rows');
+    const pagination = document.getElementById('pagination');
+
+    gods.forEach(god => {
+      const voteRef = ref(db, 'votes/' + god.key);
+      onValue(voteRef, (snapshot) => {
+        votesData[god.key] = snapshot.val() || 0;
+        renderTable();
+      });
+    });
+
+    function vote(godKey) {
+      const voteRef = ref(db, 'votes/' + godKey);
+      runTransaction(voteRef, (currentVotes) => {
+        return (currentVotes || 0) + 1;
+      });
+    }
+
+    function renderTable() {
+      const sortedGods = gods.sort((a, b) => (votesData[b.key] || 0) - (votesData[a.key] || 0));
+      const start = (currentPage - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+      const paginatedGods = sortedGods.slice(start, end);
+
+      votingRows.innerHTML = '';
+      paginatedGods.forEach(god => {
+        const row = document.createElement('tr');
+
+        const nameCell = document.createElement('td');
+        nameCell.textContent = god.label;
+        row.appendChild(nameCell);
+
+        const voteCell = document.createElement('td');
+        voteCell.textContent = votesData[god.key] || 0;
+        row.appendChild(voteCell);
+
+        const actionCell = document.createElement('td');
+        const btn = document.createElement('button');
+        btn.textContent = 'Vote';
+        btn.className = 'vote-btn';
+        btn.onclick = () => vote(god.key);
+        actionCell.appendChild(btn);
+        row.appendChild(actionCell);
+
+        votingRows.appendChild(row);
+      });
+
+      renderPagination(sortedGods.length);
+    }
+
+    function renderPagination(totalRows) {
+      const totalPages = Math.ceil(totalRows / rowsPerPage);
+      pagination.innerHTML = '';
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.onclick = () => {
+          currentPage = i;
+          renderTable();
+        };
+        pagination.appendChild(btn);
+      }
+    }
+  </script>
 </body>
 </html>
